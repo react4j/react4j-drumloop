@@ -43,6 +43,7 @@ define 'react4j-drumloop' do
               })
 
   iml.excluded_directories << project._('tmp')
+  iml.excluded_directories << project._('vendor/hooks-drum-machine/node_modules')
 
   ipr.add_component_from_artifact(:idea_codestyle)
 
