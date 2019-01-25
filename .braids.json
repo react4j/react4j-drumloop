@@ -1,0 +1,10 @@
+{
+  "config_version": 1,
+  "mirrors": {
+    "vendor/hooks-drum-machine": {
+      "url": "https://github.com/kenwheeler/hooks-drum-machine.git",
+      "branch": "master",
+      "revision": "405ebd57ac7c391f5a80c7da628a9276b9ac3511"
+    }
+  }
+}
