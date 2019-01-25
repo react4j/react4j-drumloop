@@ -15,3 +15,96 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.container {
+  max-width: 800px;
+  margin: auto;
+  background: linear-gradient(to bottom right, #222, #0a0a0a);
+  border: 2px solid black;
+  border-radius: 4px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 0 1 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: space-between;
+}
+
+.logo {
+  font-size: 28px;
+  color: #25ccf7;
+  font-family: 'Righteous', cursive;
+  padding: 20px;
+  margin: 0;
+  text-transform: uppercase;
+  display: inline-block;
+}
+
+.button {
+  background: none;
+  flex: 1;
+  border: 2px solid #fd7272;
+  color: #fd7272;
+  display: inline-block;
+  font-size: 24px;
+  border-radius: 2px;
+  padding: 20px;
+  font-family: 'Righteous', cursive;
+  margin: 2px;
+}
+
+.button_held {
+  background: #fd7272;
+  color: black;
+}
+
+.button:active {
+  background: #fd7272;
+  color: black;
+}
+
+.buttonContainer {
+  flex: 1;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  padding: 0 20px 10px;
+  display: flex;
+}
+
+.bpmInput {
+  color: #25ccf7;
+  border: 2px solid #25ccf7;
+  font-size: 18px;
+  background: none;
+  padding: 10px;
+  font-family: 'Righteous', cursive;
+  border-radius: 2;
+  margin: 2px 4px;
+  margin-right: 20px;
+  align-self: center;
+}
+
+.startButton {
+  color: #FD7272;
+  border: 2px solid #FD7272;
+  background: none;
+  font-family: 'Righteous', cursive;
+  padding: 10px;
+  font-size: 18px;
+  border-radius: 2;
+  margin: 2px 4px;
+  margin-right: 20px;
+  align-self: center;
+  min-width: 100px;
+}
+
+.startButton_off {
+  color: #25CCF7;
+  border: 2px solid #25CCF7;
+}
