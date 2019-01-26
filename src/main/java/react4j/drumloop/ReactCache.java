@@ -8,7 +8,7 @@ import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "React" )
+@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "ReactCache" )
 public final class ReactCache
 {
   private ReactCache()
