@@ -78,13 +78,13 @@ public abstract class DrumLoopView
   }
 
   @Nonnull
-  private ReactNode renderTrack( @Nonnull final Track t )
+  private ReactNode renderTrack( @Nonnull final Track track )
   {
     return div( new HtmlProps().className( "track" ),
                 div( new HtmlProps().className( "track_info" ),
-                     h2( new HtmlProps().className( "track_title" ), t.getName() ) ),
-                div( new HtmlProps().className( "step_row" )
-
+                     h2( new HtmlProps().className( "track_title" ), track.getName() ) ),
+                div( new HtmlProps().className( "step_row" ),
+                     fragment( track.getStepCells().stream().map( StepButtonBuilder::cell ) )
                 )
     );
   }
