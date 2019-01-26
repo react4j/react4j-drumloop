@@ -1,8 +1,8 @@
 package react4j.drumloop.views;
 
+import arez.annotations.Action;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.xml.ws.Action;
 import react4j.ReactNode;
 import react4j.annotations.Prop;
 import react4j.annotations.ReactComponent;
