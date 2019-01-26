@@ -1,8 +1,5 @@
 package react4j.drumloop.views;
 
-import arez.annotations.Action;
-import arez.annotations.Observable;
-import arez.annotations.PostConstruct;
 import elemental2.dom.HTMLInputElement;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -16,8 +13,8 @@ import react4j.dom.proptypes.html.CssProps;
 import react4j.dom.proptypes.html.HtmlProps;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
+import react4j.drumloop.model.DrumMachine;
 import react4j.drumloop.model.Track;
-import react4j.drumloop.model.TrackRepository;
 import static react4j.dom.DOM.*;
 
 @ReactComponent
@@ -25,47 +22,25 @@ public abstract class DrumLoopView
   extends ReactArezComponent
 {
   @Inject
-  TrackRepository _trackRepository;
-
-  @PostConstruct
-  final void postConstruct()
-  {
-    setBpm( 65 );
-  }
-
-  @Observable( writeOutsideTransaction = true )
-  abstract int bpm();
-
-  abstract void setBpm( int bpm );
+  DrumMachine _drumMachine;
 
   private void onBpmChange( @Nonnull final FormEvent e )
   {
-    setBpm( Integer.parseInt( ( (HTMLInputElement) e.getTarget() ).value ) );
-  }
-
-  @Observable
-  abstract boolean on();
-
-  abstract void setOn( boolean on );
-
-  @Action
-  void toggleOn()
-  {
-    setOn( !on() );
+    _drumMachine.setBpm( Integer.parseInt( ( (HTMLInputElement) e.getTarget() ).value ) );
   }
 
   @Nullable
   @Override
   protected ReactNode render()
   {
-    final boolean on = on();
+    final boolean on = _drumMachine.isRunning();
     final int step = 0;
     return div( new HtmlProps().className( "container" ),
                 renderHeader( on ),
                 // <React.Suspense fallback={<p>loading</p>}>
                 div( new HtmlProps().className( "stepSequencer" ),
                      renderIndicator( on, step ),
-                     fragment( _trackRepository.getTracks().stream().map( this::renderTrack ) )
+                     fragment( _drumMachine.getTracks().stream().map( this::renderTrack ) )
                 ),
                 div( new HtmlProps().className( "buttonContainer" ),
                      FxButtonBuilder.title( "Turn Up (F)" ).sound( "sounds/loop.wav" ),
@@ -97,13 +72,13 @@ public abstract class DrumLoopView
                 input( new InputProps()
                          .className( "bpmInput" )
                          .type( InputType.number )
-                         .value( String.valueOf( bpm() ) )
+                         .value( String.valueOf( _drumMachine.getBpm() ) )
                          .min( "60" )
                          .max( "180" )
                          .onChange( this::onBpmChange ) ),
                 button( new BtnProps()
                           .className( "startButton", on ? null : "startButton_off" )
-                          .onClick( e -> toggleOn() ),
+                          .onClick( e -> _drumMachine.toggleRunning() ),
                         on ? "Stop" : "Play"
                 )
     );

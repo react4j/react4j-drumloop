@@ -1,20 +1,24 @@
 package react4j.drumloop.model;
 
+import arez.annotations.Action;
+import arez.annotations.ArezComponent;
+import arez.annotations.Observable;
 import arez.component.CollectionsUtil;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javax.inject.Singleton;
 
 @Singleton
-public final class TrackRepository
+@ArezComponent
+public abstract class DrumMachine
 {
+  private static final int INITIAL_BPM = 65;
   @Nonnull
   private final ArrayList<Track> _tracks = new ArrayList<>();
+  private int _bpm = INITIAL_BPM;
 
-  @Inject
-  TrackRepository()
+  DrumMachine()
   {
     _tracks.add( new Track( "Kick", "sounds/kick.wav" ) );
     _tracks.add( new Track( "Sub1", "sounds/bass.wav" ) );
@@ -26,8 +30,30 @@ public final class TrackRepository
   }
 
   @Nonnull
-  public List<Track> getTracks()
+  public final List<Track> getTracks()
   {
     return CollectionsUtil.wrap( _tracks );
+  }
+
+  @Observable( writeOutsideTransaction = true )
+  public int getBpm()
+  {
+    return _bpm;
+  }
+
+  public void setBpm( final int bpm )
+  {
+    _bpm = bpm;
+  }
+
+  @Observable
+  public abstract boolean isRunning();
+
+  public abstract void setRunning( boolean running );
+
+  @Action
+  public void toggleRunning()
+  {
+    setRunning( !isRunning() );
   }
 }
