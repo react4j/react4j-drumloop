@@ -55,7 +55,7 @@ public abstract class DrumMachine
   @Action
   public void incCurrentStep()
   {
-    setCurrentStep( getCurrentStep() + 1 % MAX_STEPS );
+    setCurrentStep( ( getCurrentStep() + 1 ) % MAX_STEPS );
   }
 
   @Observable
