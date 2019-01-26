@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 public abstract class DrumMachine
 {
   private static final int INITIAL_BPM = 65;
+  private static final int MAX_STEPS = 4 /* bars */ * 4 /* beats */;
   @Nonnull
   private final ArrayList<Track> _tracks = new ArrayList<>();
   private int _bpm = INITIAL_BPM;
@@ -44,6 +45,17 @@ public abstract class DrumMachine
   public void setBpm( final int bpm )
   {
     _bpm = bpm;
+  }
+
+  @Observable
+  public abstract int getCurrentStep();
+
+  abstract void setCurrentStep( int currentStep );
+
+  @Action
+  public void incCurrentStep()
+  {
+    setCurrentStep( getCurrentStep() + 1 % MAX_STEPS );
   }
 
   @Observable

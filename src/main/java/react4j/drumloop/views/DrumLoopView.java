@@ -34,7 +34,7 @@ public abstract class DrumLoopView
   protected ReactNode render()
   {
     final boolean on = _drumMachine.isRunning();
-    final int step = 0;
+    final int step = _drumMachine.getCurrentStep();
     return div( new HtmlProps().className( "container" ),
                 renderHeader( on ),
                 // <React.Suspense fallback={<p>loading</p>}>
