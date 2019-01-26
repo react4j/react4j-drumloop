@@ -21,6 +21,7 @@ define 'react4j-drumloop' do
                :elemental2_core,
                :elemental2_dom,
                :elemental2_promise,
+               :elemental2_media,
                :braincheck,
                :react4j_core,
                :react4j_dom,
