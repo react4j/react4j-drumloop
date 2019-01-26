@@ -32,7 +32,7 @@ body {
   display: flex;
   justify-content: space-between;
   flex-direction: row;
-  align-items: space-between;
+  align-items: center;
 }
 
 .logo {
@@ -84,9 +84,8 @@ body {
   background: none;
   padding: 10px;
   font-family: 'Righteous', cursive;
-  border-radius: 2;
-  margin: 2px 4px;
-  margin-right: 20px;
+  border-radius: 2px;
+  margin: 2px 20px 2px 4px;
   align-self: center;
 }
 
@@ -97,9 +96,8 @@ body {
   font-family: 'Righteous', cursive;
   padding: 10px;
   font-size: 18px;
-  border-radius: 2;
-  margin: 2px 4px;
-  margin-right: 20px;
+  border-radius: 2px;
+  margin: 2px 20px 2px 4px;
   align-self: center;
   min-width: 100px;
 }
@@ -107,4 +105,88 @@ body {
 .startButton_off {
   color: #25CCF7;
   border: 2px solid #25CCF7;
+}
+
+.stepSequencer {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  border: 1px solid #555;
+  margin: 0 20px 20px;
+  position: relative;
+}
+
+.indicatorContainer {
+  position: absolute;
+  width: 600px;
+  top: 0;
+  right: 0;
+  height: 100%;
+  padding: 4px 2px;
+  pointer-events: none;
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  width: 38px;
+  height: 100%;
+  background: #00ff0020;
+}
+
+.track {
+  display: flex;
+  flex: 1;
+}
+
+.track_info {
+  flex: 0 0 155px;
+  background: linear-gradient(#292929, #111);
+  border: 1px solid #555;
+}
+
+.track_title {
+  color: white;
+  font-size: 14px;
+  margin: 0;
+  vertical-align: middle;
+  padding: 0 10px;
+  line-height: 50px;
+}
+
+.step_row {
+  display: flex;
+  flex: 1;
+}
+
+.step_button {
+  flex: 1;
+  background: #FD7272;
+  opacity: 0.35;
+  border-radius: 2px;
+  margin: 2px;
+}
+
+.step_button_on {
+  opacity: 1;
+}
+
+@keyframes doubled {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5
+  }
+}
+
+.step_button_doubled {
+  animation: doubled 0.5s linear infinite;
+}
+
+.step_button_odd {
+  background: #25CCF7;
 }
