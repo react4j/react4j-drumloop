@@ -67,5 +67,6 @@ public abstract class DrumMachine
   public void toggleRunning()
   {
     setRunning( !isRunning() );
+    setCurrentStep( 0 );
   }
 }
