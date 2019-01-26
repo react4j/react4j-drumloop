@@ -3,10 +3,13 @@ package react4j.drumloop.model;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
 import arez.annotations.Observable;
+import arez.annotations.Observe;
 import arez.component.CollectionsUtil;
+import elemental2.dom.DomGlobal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import javax.inject.Singleton;
 
 @Singleton
@@ -18,6 +21,8 @@ public abstract class DrumMachine
   @Nonnull
   private final ArrayList<Track> _tracks = new ArrayList<>();
   private int _bpm = INITIAL_BPM;
+  @Nullable
+  private Double _timerId;
 
   DrumMachine()
   {
@@ -68,5 +73,33 @@ public abstract class DrumMachine
   {
     setRunning( !isRunning() );
     setCurrentStep( 0 );
+  }
+
+  @Observe
+  void manageTimer()
+  {
+    final boolean running = isRunning();
+    if ( running && null == _timerId )
+    {
+      startTimer();
+    }
+    else if ( !running && null != _timerId )
+    {
+      cancelTimer();
+    }
+  }
+
+  private void startTimer()
+  {
+    assert null == _timerId;
+    final double delay = 60.0 * 1000 / _bpm;
+    _timerId = DomGlobal.setInterval( v -> incCurrentStep(), delay );
+  }
+
+  private void cancelTimer()
+  {
+    assert null != _timerId;
+    DomGlobal.clearInterval( _timerId );
+    _timerId = null;
   }
 }
