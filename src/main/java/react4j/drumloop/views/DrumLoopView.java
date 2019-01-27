@@ -9,7 +9,6 @@ import react4j.annotations.ReactComponent;
 import react4j.arez.ReactArezComponent;
 import react4j.dom.events.FormEvent;
 import react4j.dom.proptypes.html.BtnProps;
-import react4j.dom.proptypes.html.CssProps;
 import react4j.dom.proptypes.html.HtmlProps;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
@@ -39,7 +38,7 @@ public abstract class DrumLoopView
                 suspense( p( "Loading..." ),
                           4000,
                           fragment( div( new HtmlProps().className( "stepSequencer" ),
-                                         renderIndicator( on, step ),
+                                         IndicatorViewBuilder.build(),
                                          fragment( _drumMachine.getTracks()
                                                      .stream()
                                                      .map( TrackViewBuilder::track ) )
@@ -71,18 +70,6 @@ public abstract class DrumLoopView
                           .onClick( e -> _drumMachine.toggleRunning() ),
                         on ? "Stop" : "Play"
                 )
-    );
-  }
-
-  @Nonnull
-  private ReactNode renderIndicator( final boolean on, final int step )
-  {
-    return div( new HtmlProps().className( "indicatorContainer" ),
-                on ?
-                div( new HtmlProps()
-                       .className( "indicator" )
-                       .style( new CssProps().left( ( step * 37.5 ) + "px" ) ) ) :
-                null
     );
   }
 }
