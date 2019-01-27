@@ -6,7 +6,8 @@ complete as there is too much un-said.
 
 * Get audio working
 
-* Publish output into GitHub Pages branch.
+* Publish output into GitHub Pages branch. Make sure repository url points at it and it is
+  added to the readme.
 
 * Move beat update to a more accurate timer from WebAudio API?
 
