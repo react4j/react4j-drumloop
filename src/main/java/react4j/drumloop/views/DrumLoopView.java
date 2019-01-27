@@ -31,9 +31,8 @@ public abstract class DrumLoopView
   @Override
   protected ReactNode render()
   {
-    final boolean on = _drumMachine.isRunning();
     return div( new HtmlProps().className( "container" ),
-                renderHeader( on ),
+                renderHeader(),
                 suspense( p( "Loading..." ),
                           4000,
                           fragment( div( new HtmlProps().className( "stepSequencer" ),
@@ -53,8 +52,9 @@ public abstract class DrumLoopView
   }
 
   @Nonnull
-  private ReactNode renderHeader( final boolean on )
+  private ReactNode renderHeader()
   {
+    final boolean on = _drumMachine.isRunning();
     return div( new HtmlProps().className( "header" ),
                 h1( new HtmlProps().className( "logo" ), "Trap Lord 9000" ),
                 input( new InputProps()
