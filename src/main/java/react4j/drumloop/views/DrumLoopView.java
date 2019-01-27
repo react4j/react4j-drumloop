@@ -14,7 +14,6 @@ import react4j.dom.proptypes.html.HtmlProps;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
 import react4j.drumloop.model.DrumMachine;
-import react4j.drumloop.model.Track;
 import static react4j.dom.DOM.*;
 
 @ReactComponent
@@ -37,29 +36,19 @@ public abstract class DrumLoopView
     final int step = _drumMachine.getCurrentStep();
     return div( new HtmlProps().className( "container" ),
                 renderHeader( on ),
-                // <React.Suspense fallback={<p>loading</p>}>
-                div( new HtmlProps().className( "stepSequencer" ),
-                     renderIndicator( on, step ),
-                     fragment( _drumMachine.getTracks().stream().map( this::renderTrack ) )
-                ),
-                div( new HtmlProps().className( "buttonContainer" ),
-                     FxButtonBuilder.title( "Turn Up (F)" ).sound( "sounds/loop.wav" ),
-                     FxButtonBuilder.title( "SQUAD (Am)" ).sound( "sounds/loop130.wav" ),
-                     FxButtonBuilder.title( "Hey" ).sound( "sounds/hey.wav" ),
-                     FxButtonBuilder.title( "Yeah" ).sound( "sounds/yeah.wav" )
-                )
-                // </React.Suspense>
-    );
-  }
-
-  @Nonnull
-  private ReactNode renderTrack( @Nonnull final Track track )
-  {
-    return div( new HtmlProps().className( "track" ),
-                div( new HtmlProps().className( "track_info" ),
-                     h2( new HtmlProps().className( "track_title" ), track.getName() ) ),
-                div( new HtmlProps().className( "step_row" ),
-                     fragment( track.getStepCells().stream().map( StepButtonBuilder::cell ) )
+                suspense( p( "Loading..." ),
+                          fragment( div( new HtmlProps().className( "stepSequencer" ),
+                                         renderIndicator( on, step ),
+                                         fragment( _drumMachine.getTracks()
+                                                     .stream()
+                                                     .map( TrackViewBuilder::track ) )
+                                    ),
+                                    div( new HtmlProps().className( "buttonContainer" ),
+                                         fragment( _drumMachine.getEffects()
+                                                     .stream()
+                                                     .map( FxButtonBuilder::sound ) )
+                                    )
+                          )
                 )
     );
   }
