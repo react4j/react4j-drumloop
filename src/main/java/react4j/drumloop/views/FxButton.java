@@ -9,6 +9,7 @@ import react4j.annotations.Prop;
 import react4j.annotations.ReactComponent;
 import react4j.arez.ReactArezComponent;
 import react4j.dom.proptypes.html.BtnProps;
+import react4j.drumloop.model.SoundEffect;
 import static react4j.dom.DOM.*;
 
 @ReactComponent
@@ -17,11 +18,7 @@ abstract class FxButton
 {
   @Prop
   @Nonnull
-  abstract String title();
-
-  @Prop
-  @Nonnull
-  abstract String sound();
+  abstract SoundEffect sound();
 
   @Observable()
   abstract boolean held();
@@ -32,13 +29,15 @@ abstract class FxButton
   @Override
   protected ReactNode render()
   {
+    final SoundEffect sound = sound();
+    sound.suspendUntilAudioLoaded();
     return button( new BtnProps()
                      .className( "button", held() ? "button_held" : null )
                      .onMouseDown( e -> playSound( e.isShiftKey() ) )
                      .onTouchStart( e -> playSound( e.isShiftKey() ) )
                      .onTouchEnd( e -> stopSound() )
                      .onMouseUp( e -> stopSound() ),
-                   title() );
+                   sound.getName() );
   }
 
   @Action
