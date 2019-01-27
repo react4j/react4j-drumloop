@@ -26,9 +26,7 @@ public abstract class IndicatorView
 
     return div( new HtmlProps().className( "indicatorContainer" ),
                 on ?
-                div( new HtmlProps()
-                       .className( "indicator" )
-                       .style( new CssProps().left( ( step * 37.5 ) + "px" ) ) ) :
+                div( new HtmlProps().className( "indicator" ).style( new CssProps().left( step * 37.5 + "px" ) ) ) :
                 null
     );
   }
