@@ -5,7 +5,7 @@ import elemental2.dom.DomGlobal;
 import react4j.React;
 import react4j.dom.ReactDOM;
 import react4j.drumloop.dagger.DrumLoopComponent;
-import react4j.drumloop.views.DrumLoopViewBuilder;
+import react4j.drumloop.views.DrumMachineViewBuilder;
 
 public class App
   implements EntryPoint
@@ -19,7 +19,7 @@ public class App
     // TODO: Having to add the next line feels super bad. Other frameworks (VueJS/Angular2+)
     // combine the next two steps with the instance render and injection setup combined
     DrumLoopComponent.create();
-    ReactDOM.render( React.createStrictMode( DrumLoopViewBuilder.build() ),
+    ReactDOM.render( React.createStrictMode( DrumMachineViewBuilder.build() ),
                      DomGlobal.document.getElementById( "app" ) );
   }
 }

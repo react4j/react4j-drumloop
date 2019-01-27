@@ -5,7 +5,7 @@ import javax.annotation.Nonnull;
 import javax.inject.Singleton;
 import react4j.drumloop.model.DrumMachineDaggerModule;
 import react4j.drumloop.views.BpmInputDaggerComponentExtension;
-import react4j.drumloop.views.DrumLoopViewDaggerComponentExtension;
+import react4j.drumloop.views.DrumMachineViewDaggerComponentExtension;
 import react4j.drumloop.views.IndicatorViewDaggerComponentExtension;
 import react4j.drumloop.views.PlayButtonDaggerComponentExtension;
 
@@ -13,7 +13,7 @@ import react4j.drumloop.views.PlayButtonDaggerComponentExtension;
 @Component( modules = DrumMachineDaggerModule.class )
 public interface DrumLoopComponent
   extends BpmInputDaggerComponentExtension,
-          DrumLoopViewDaggerComponentExtension,
+          DrumMachineViewDaggerComponentExtension,
           IndicatorViewDaggerComponentExtension,
           PlayButtonDaggerComponentExtension
 {
@@ -22,7 +22,7 @@ public interface DrumLoopComponent
   {
     final DrumLoopComponent component = DaggerDrumLoopComponent.create();
     component.bindBpmInput();
-    component.bindDrumLoopView();
+    component.bindDrumMachineView();
     component.bindIndicatorView();
     component.bindPlayButton();
     return component;

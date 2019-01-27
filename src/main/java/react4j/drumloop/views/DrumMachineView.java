@@ -10,7 +10,7 @@ import react4j.drumloop.model.DrumMachine;
 import static react4j.dom.DOM.*;
 
 @ReactComponent
-public abstract class DrumLoopView
+public abstract class DrumMachineView
   extends Component
 {
   @Inject
