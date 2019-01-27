@@ -32,7 +32,6 @@ public abstract class DrumLoopView
   protected ReactNode render()
   {
     final boolean on = _drumMachine.isRunning();
-    final int step = _drumMachine.getCurrentStep();
     return div( new HtmlProps().className( "container" ),
                 renderHeader( on ),
                 suspense( p( "Loading..." ),
