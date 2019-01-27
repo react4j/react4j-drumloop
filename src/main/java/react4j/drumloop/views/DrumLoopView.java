@@ -37,6 +37,7 @@ public abstract class DrumLoopView
     return div( new HtmlProps().className( "container" ),
                 renderHeader( on ),
                 suspense( p( "Loading..." ),
+                          4000,
                           fragment( div( new HtmlProps().className( "stepSequencer" ),
                                          renderIndicator( on, step ),
                                          fragment( _drumMachine.getTracks()
