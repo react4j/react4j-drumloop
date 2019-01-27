@@ -39,12 +39,12 @@ public abstract class DrumLoopView
                                          IndicatorViewBuilder.build(),
                                          fragment( _drumMachine.getTracks()
                                                      .stream()
-                                                     .map( TrackViewBuilder::track ) )
+                                                     .map( t -> TrackViewBuilder.key( t.getName() ).track( t ) ) )
                                     ),
                                     div( new HtmlProps().className( "buttonContainer" ),
                                          fragment( _drumMachine.getEffects()
                                                      .stream()
-                                                     .map( FxButtonBuilder::sound ) )
+                                                     .map( s -> FxButtonBuilder.key( s.getName() ).sound( s ) ) )
                                     )
                           )
                 )

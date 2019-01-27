@@ -28,7 +28,7 @@ public abstract class TrackView
                 div( new HtmlProps().className( "track_info" ),
                      h2( new HtmlProps().className( "track_title" ), track.getName() ) ),
                 div( new HtmlProps().className( "step_row" ),
-                     fragment( track.getStepCells().stream().map( StepButtonBuilder::cell ) )
+                     fragment( track.getStepCells().stream().map( c -> StepButtonBuilder.key( c.beat() ).cell( c ) ) )
                 )
     );
   }
