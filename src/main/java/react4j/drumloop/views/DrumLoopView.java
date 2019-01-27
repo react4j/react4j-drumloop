@@ -1,6 +1,5 @@
 package react4j.drumloop.views;
 
-import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import react4j.Component;
@@ -22,7 +21,11 @@ public abstract class DrumLoopView
   protected ReactNode render()
   {
     return div( new HtmlProps().className( "container" ),
-                renderHeader(),
+                div( new HtmlProps().className( "header" ),
+                     h1( new HtmlProps().className( "logo" ), "Trap Lord 9000" ),
+                     BpmInputBuilder.build(),
+                     PlayButtonBuilder.build()
+                ),
                 suspense( p( "Loading..." ),
                           4000,
                           fragment( div( new HtmlProps().className( "stepSequencer" ),
@@ -38,16 +41,6 @@ public abstract class DrumLoopView
                                     )
                           )
                 )
-    );
-  }
-
-  @Nonnull
-  private ReactNode renderHeader()
-  {
-    return div( new HtmlProps().className( "header" ),
-                h1( new HtmlProps().className( "logo" ), "Trap Lord 9000" ),
-                BpmInputBuilder.build(),
-                PlayButtonBuilder.build()
     );
   }
 }
