@@ -19,7 +19,8 @@ public class App
     // TODO: Having to add the next line feels super bad. Other frameworks (VueJS/Angular2+)
     // combine the next two steps with the instance render and injection setup combined
     DrumLoopComponent.create();
-    ReactDOM.render( React.createStrictMode( DrumMachineViewBuilder.build() ),
-                     DomGlobal.document.getElementById( "app" ) );
+    ReactDOM
+      .createRoot( DomGlobal.document.getElementById( "app" ) )
+      .render( React.createStrictMode( DrumMachineViewBuilder.build() ), null );
   }
 }
