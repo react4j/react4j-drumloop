@@ -8,7 +8,6 @@ import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
 import react4j.arez.ReactArezComponent;
 import react4j.dom.events.FormEvent;
-import react4j.dom.proptypes.html.BtnProps;
 import react4j.dom.proptypes.html.HtmlProps;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
@@ -54,7 +53,6 @@ public abstract class DrumLoopView
   @Nonnull
   private ReactNode renderHeader()
   {
-    final boolean on = _drumMachine.isRunning();
     return div( new HtmlProps().className( "header" ),
                 h1( new HtmlProps().className( "logo" ), "Trap Lord 9000" ),
                 input( new InputProps()
@@ -64,11 +62,7 @@ public abstract class DrumLoopView
                          .min( "60" )
                          .max( "180" )
                          .onChange( this::onBpmChange ) ),
-                button( new BtnProps()
-                          .className( "startButton", on ? null : "startButton_off" )
-                          .onClick( e -> _drumMachine.toggleRunning() ),
-                        on ? "Stop" : "Play"
-                )
+                PlayButtonBuilder.build()
     );
   }
 }
