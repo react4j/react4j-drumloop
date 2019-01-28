@@ -16,7 +16,7 @@ import static react4j.dom.DOM.*;
 abstract class FxButton
   extends ReactArezComponent
 {
-  @Prop
+  @Prop( immutable = true )
   @Nonnull
   abstract SoundEffect sound();
 

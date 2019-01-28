@@ -15,7 +15,7 @@ import static react4j.dom.DOM.*;
 public abstract class StepButton
   extends ReactArezComponent
 {
-  @Prop
+  @Prop( immutable = true )
   @Nonnull
   abstract StepCell cell();
 

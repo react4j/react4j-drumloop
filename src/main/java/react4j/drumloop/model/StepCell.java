@@ -3,9 +3,11 @@ package react4j.drumloop.model;
 import arez.annotations.ArezComponent;
 import arez.annotations.Observable;
 import javax.annotation.Nonnull;
+import react4j.Keyed;
 
 @ArezComponent
 public abstract class StepCell
+  implements Keyed
 {
   private static final int STATE_OFF = 0;
   private static final int STATE_ON = 1;
@@ -30,6 +32,13 @@ public abstract class StepCell
   public int beat()
   {
     return _beat;
+  }
+
+  @Nonnull
+  @Override
+  public String getKey()
+  {
+    return String.valueOf( beat() );
   }
 
   public final boolean on()

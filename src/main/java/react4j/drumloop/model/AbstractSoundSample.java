@@ -4,8 +4,10 @@ import elemental2.media.AudioBuffer;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import react4j.Keyed;
 
 public abstract class AbstractSoundSample
+  implements Keyed
 {
   @Nonnull
   private final DrumMachine _drumMachine;
@@ -21,6 +23,13 @@ public abstract class AbstractSoundSample
     _drumMachine = Objects.requireNonNull( drumMachine );
     _name = Objects.requireNonNull( name );
     _sound = Objects.requireNonNull( sound );
+  }
+
+  @Nonnull
+  @Override
+  public String getKey()
+  {
+    return getSound();
   }
 
   @Nonnull

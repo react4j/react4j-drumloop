@@ -14,7 +14,7 @@ import static react4j.dom.DOM.*;
 public abstract class TrackView
   extends Component
 {
-  @Prop
+  @Prop( immutable = true )
   @Nonnull
   abstract Track track();
 
@@ -28,7 +28,7 @@ public abstract class TrackView
                 div( new HtmlProps().className( "track_info" ),
                      h2( new HtmlProps().className( "track_title" ), track.getName() ) ),
                 div( new HtmlProps().className( "step_row" ),
-                     fragment( track.getStepCells().stream().map( c -> StepButtonBuilder.key( c.beat() ).cell( c ) ) )
+                     fragment( track.getStepCells().stream().map( StepButtonBuilder::cell ) )
                 )
     );
   }
