@@ -65,13 +65,13 @@ public abstract class DrumMachine
   }
 
   @Nonnull
-  public AudioContext getAudioContext()
+  private AudioContext getAudioContext()
   {
     return _audioContext;
   }
 
   @Nonnull
-  private AudioContext getActiveAudioContext()
+  AudioContext getActiveAudioContext()
   {
     final AudioContext audioContext = getAudioContext();
     if ( "suspended".equals( audioContext.state ) )
