@@ -46,16 +46,20 @@ abstract class FxButton
     if ( held() )
     {
       setHeld( false );
-      //TODO: Stop loop
+      sound().stop();
     }
     else
     {
+      final SoundEffect sound = sound();
       if ( isShiftKeyDown )
       {
-        //TODO: Mark buffer as looping buffer.loop = true
+        sound.loop();
         setHeld( true );
       }
-      //TODO: buffer.start();
+      else
+      {
+        sound.play();
+      }
     }
   }
 
@@ -64,7 +68,7 @@ abstract class FxButton
   {
     if ( !held() )
     {
-      //TODO: Stop loop
+      sound().stop();
     }
   }
 }
