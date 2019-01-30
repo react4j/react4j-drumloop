@@ -20,6 +20,7 @@ public abstract class AbstractSoundSample
   private final String _sound;
   @Nullable
   private AudioBuffer _audioBuffer;
+  @Nullable
   private AudioBufferSourceNode _node;
 
   AbstractSoundSample( @Nonnull final DrumMachine drumMachine, @Nonnull final String name, @Nonnull final String sound )
