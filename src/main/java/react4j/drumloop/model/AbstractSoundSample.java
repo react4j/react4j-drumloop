@@ -61,17 +61,11 @@ public abstract class AbstractSoundSample
   private AudioBufferSourceNode newAudioNode()
   {
     final AudioContext audioContext = _drumMachine.getActiveAudioContext();
-    _node = audioContext.createBufferSource();
-    _node.buffer = getAudioBuffer();
-    _node.connect( audioContext.destination );
-    return _node;
-  }
-
-  @Nonnull
-  private AudioBuffer getAudioBuffer()
-  {
+    final AudioBufferSourceNode node = audioContext.createBufferSource();
     assert null != _audioBuffer;
-    return _audioBuffer;
+    node.buffer = _audioBuffer;
+    node.connect( audioContext.destination );
+    return node;
   }
 
   public final void play()
