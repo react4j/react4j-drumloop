@@ -1,13 +1,9 @@
 package react4j.drumloop.model;
 
 import elemental2.media.AudioBuffer;
-import elemental2.media.AudioBufferSourceNode;
-import elemental2.media.AudioContext;
-import elemental2.media.GainNode;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import jsinterop.base.Js;
 import react4j.Keyed;
 
 public abstract class AbstractSoundSample
@@ -21,8 +17,6 @@ public abstract class AbstractSoundSample
   private final String _sound;
   @Nullable
   private AudioBuffer _audioBuffer;
-  @Nullable
-  private AudioBufferSourceNode _node;
 
   AbstractSoundSample( @Nonnull final DrumMachine drumMachine, @Nonnull final String name, @Nonnull final String sound )
   {
@@ -59,64 +53,15 @@ public abstract class AbstractSoundSample
   }
 
   @Nonnull
-  private AudioBufferSourceNode newAudioNode()
+  public DrumMachine getDrumMachine()
   {
-    final AudioContext audioContext = _drumMachine.getActiveAudioContext();
-    final AudioBufferSourceNode node = audioContext.createBufferSource();
+    return _drumMachine;
+  }
+
+  @Nonnull
+  public AudioBuffer getAudioBuffer()
+  {
     assert null != _audioBuffer;
-    node.buffer = _audioBuffer;
-    final GainNode gain = audioContext.createGain();
-    node.connect( gain );
-    gain.gain.value = 0.2;
-    gain.connect( audioContext.destination );
-    return node;
-  }
-
-  public final void play()
-  {
-    if ( null != _node )
-    {
-      stop();
-    }
-    start( false );
-  }
-
-  public final void start( final boolean loop )
-  {
-    final AudioBufferSourceNode node = newAudioNode();
-    node.loop = loop;
-    node.onended = e -> {
-      if ( !node.loop )
-      {
-        stop();
-      }
-      //TODO: This should be void return and has been fixed in upstream closure compielr
-      return null;
-    };
-    node.start( 0 );
-    _node = node;
-  }
-
-  public final void loop()
-  {
-    if ( null != _node )
-    {
-      _node.loop = true;
-      Js.debugger();
-    }
-    else
-    {
-      start( true );
-    }
-  }
-
-  public final void stop()
-  {
-    if ( null != _node )
-    {
-      _node.stop();
-      _node.disconnect();
-      _node = null;
-    }
+    return _audioBuffer;
   }
 }

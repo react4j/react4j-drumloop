@@ -2,8 +2,13 @@ package react4j.drumloop.views;
 
 import arez.annotations.Action;
 import arez.annotations.Observable;
+import arez.annotations.PreDispose;
+import elemental2.media.AudioBufferSourceNode;
+import elemental2.media.AudioContext;
+import elemental2.media.GainNode;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import jsinterop.base.Js;
 import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.Prop;
@@ -16,6 +21,9 @@ import static react4j.dom.DOM.*;
 abstract class FxButton
   extends Component
 {
+  @Nullable
+  private AudioBufferSourceNode _node;
+
   @Prop( immutable = true )
   @Nonnull
   abstract SoundEffect sound();
@@ -24,6 +32,12 @@ abstract class FxButton
   abstract boolean held();
 
   abstract void setHeld( boolean held );
+
+  @PreDispose
+  final void preDispose()
+  {
+    stop();
+  }
 
   @Nullable
   @Override
@@ -46,19 +60,18 @@ abstract class FxButton
     if ( held() )
     {
       setHeld( false );
-      sound().stop();
+      stop();
     }
     else
     {
-      final SoundEffect sound = sound();
       if ( isShiftKeyDown )
       {
-        sound.loop();
+        loop();
         setHeld( true );
       }
       else
       {
-        sound.play();
+        play();
       }
     }
   }
@@ -68,7 +81,69 @@ abstract class FxButton
   {
     if ( !held() )
     {
-      sound().stop();
+      stop();
+    }
+  }
+
+  @Nonnull
+  private AudioBufferSourceNode newAudioNode()
+  {
+    final SoundEffect sound = sound();
+    final AudioContext audioContext = sound.getDrumMachine().getActiveAudioContext();
+    final AudioBufferSourceNode node = audioContext.createBufferSource();
+    node.buffer = sound.getAudioBuffer();
+    final GainNode gain = audioContext.createGain();
+    node.connect( gain );
+    gain.gain.value = 0.2;
+    gain.connect( audioContext.destination );
+    return node;
+  }
+
+  private void play()
+  {
+    if ( null != _node )
+    {
+      stop();
+    }
+    start( false );
+  }
+
+  private void start( final boolean loop )
+  {
+    final AudioBufferSourceNode node = newAudioNode();
+    node.loop = loop;
+    node.onended = e -> {
+      if ( !node.loop )
+      {
+        stop();
+      }
+      //TODO: This should be void return and has been fixed in upstream closure compielr
+      return null;
+    };
+    node.start( 0 );
+    _node = node;
+  }
+
+  private void loop()
+  {
+    if ( null != _node )
+    {
+      _node.loop = true;
+      Js.debugger();
+    }
+    else
+    {
+      start( true );
+    }
+  }
+
+  private void stop()
+  {
+    if ( null != _node )
+    {
+      _node.stop();
+      _node.disconnect();
+      _node = null;
     }
   }
 }
