@@ -3,22 +3,26 @@ package react4j.drumloop.views;
 import elemental2.dom.HTMLInputElement;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.inject.Inject;
+import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
-import react4j.arez.ReactArezComponent;
 import react4j.dom.events.FormEvent;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
 import react4j.drumloop.model.DrumMachine;
 import static react4j.dom.DOM.*;
 
-@ReactComponent
+@ReactComponent( type = ReactComponent.Type.TRACKING )
 public abstract class BpmInput
-  extends ReactArezComponent
+  extends Component
 {
-  @Inject
-  DrumMachine _drumMachine;
+  @Nonnull
+  private final DrumMachine _drumMachine;
+
+  BpmInput( @Nonnull final DrumMachine drumMachine )
+  {
+    _drumMachine = drumMachine;
+  }
 
   private void onBpmChange( @Nonnull final FormEvent e )
   {

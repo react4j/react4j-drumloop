@@ -1,7 +1,7 @@
 package react4j.drumloop.views;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
@@ -13,8 +13,13 @@ import static react4j.dom.DOM.*;
 public abstract class DrumMachineView
   extends Component
 {
-  @Inject
-  DrumMachine _drumMachine;
+  @Nonnull
+  private final DrumMachine _drumMachine;
+
+  DrumMachineView( @Nonnull final DrumMachine drumMachine )
+  {
+    _drumMachine = drumMachine;
+  }
 
   @Nullable
   @Override

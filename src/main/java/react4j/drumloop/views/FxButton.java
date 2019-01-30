@@ -4,17 +4,17 @@ import arez.annotations.Action;
 import arez.annotations.Observable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.Prop;
 import react4j.annotations.ReactComponent;
-import react4j.arez.ReactArezComponent;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.drumloop.model.SoundEffect;
 import static react4j.dom.DOM.*;
 
-@ReactComponent
+@ReactComponent( type = ReactComponent.Type.TRACKING )
 abstract class FxButton
-  extends ReactArezComponent
+  extends Component
 {
   @Prop( immutable = true )
   @Nonnull

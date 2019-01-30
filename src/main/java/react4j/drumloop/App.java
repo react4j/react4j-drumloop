@@ -2,7 +2,7 @@ package react4j.drumloop;
 
 import com.google.gwt.core.client.EntryPoint;
 import elemental2.dom.DomGlobal;
-import react4j.React;
+import react4j.ReactElement;
 import react4j.dom.ReactDOM;
 import react4j.drumloop.dagger.DrumLoopComponent;
 import react4j.drumloop.views.DrumMachineViewBuilder;
@@ -21,6 +21,6 @@ public class App
     DrumLoopComponent.create();
     ReactDOM
       .createRoot( DomGlobal.document.getElementById( "app" ) )
-      .render( React.createStrictMode( DrumMachineViewBuilder.build() ), null );
+      .render( ReactElement.createStrictMode( DrumMachineViewBuilder.build() ), null );
   }
 }
