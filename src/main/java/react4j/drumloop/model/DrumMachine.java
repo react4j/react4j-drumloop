@@ -71,6 +71,17 @@ public abstract class DrumMachine
   }
 
   @Nonnull
+  private AudioContext getActiveAudioContext()
+  {
+    final AudioContext audioContext = getAudioContext();
+    if ( "suspended".equals( audioContext.state ) )
+    {
+      audioContext.resume();
+    }
+    return audioContext;
+  }
+
+  @Nonnull
   final ReactCache.Resource<String, AudioBuffer> getAudioCache()
   {
     return _audioCache;
