@@ -3,6 +3,7 @@ package react4j.drumloop.model;
 import elemental2.media.AudioBuffer;
 import elemental2.media.AudioBufferSourceNode;
 import elemental2.media.AudioContext;
+import elemental2.media.GainNode;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -64,7 +65,10 @@ public abstract class AbstractSoundSample
     final AudioBufferSourceNode node = audioContext.createBufferSource();
     assert null != _audioBuffer;
     node.buffer = _audioBuffer;
-    node.connect( audioContext.destination );
+    final GainNode gain = audioContext.createGain();
+    node.connect( gain );
+    gain.gain.value = 0.2;
+    gain.connect( audioContext.destination );
     return node;
   }
 
