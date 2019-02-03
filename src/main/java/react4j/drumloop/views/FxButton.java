@@ -117,8 +117,6 @@ abstract class FxButton
       {
         stop();
       }
-      //TODO: This should be void return and has been fixed in upstream closure compielr
-      return null;
     };
     node.start( 0 );
     _node = node;
