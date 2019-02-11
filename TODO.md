@@ -7,8 +7,6 @@ complete as there is too much un-said.
 * Publish output into GitHub Pages branch. Make sure repository url points at it and it is
   added to the readme.
 
-* Add project into compile tests for react4j/arez?
-
 * Consider either moving `ReactCache` to react4j project. Also consider whether it should be re-implemented
   or just use a binding to underlying JS library. A reimplementation would be much safer and faster as could
   add more extensive invariant checking into it and also could DCE all unused code.
