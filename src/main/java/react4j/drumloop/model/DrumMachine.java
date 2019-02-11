@@ -22,7 +22,9 @@ import react4j.drumloop.ReactCache;
 public abstract class DrumMachine
 {
   private static final int INITIAL_BPM = 65;
-  private static final int MAX_STEPS = 4 /* bars */ * 4 /* beats */;
+  private static final int BAR_COUNT = 4;
+  private static final int BEATS_PER_BAR = 4;
+  private static final int MAX_STEPS = BAR_COUNT * BEATS_PER_BAR;
   @Nonnull
   private final AudioContext _audioContext;
   @Nonnull
