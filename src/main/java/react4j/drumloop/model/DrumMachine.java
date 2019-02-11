@@ -3,17 +3,17 @@ package react4j.drumloop.model;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
 import arez.annotations.Observable;
-import arez.annotations.Observe;
 import arez.component.CollectionsUtil;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.Response;
 import elemental2.media.AudioBuffer;
+import elemental2.media.AudioBufferSourceNode;
 import elemental2.media.AudioContext;
+import elemental2.media.GainNode;
 import elemental2.promise.Promise;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.inject.Singleton;
 import react4j.drumloop.ReactCache;
 
@@ -32,8 +32,6 @@ public abstract class DrumMachine
   @Nonnull
   private final ArrayList<SoundEffect> _effects = new ArrayList<>();
   private int _bpm = INITIAL_BPM;
-  @Nullable
-  private Double _timerId;
   @Nonnull
   private final ReactCache.Resource<String, AudioBuffer> _audioCache;
 
@@ -93,16 +91,10 @@ public abstract class DrumMachine
     _bpm = bpm;
   }
 
-  @Observable
+  @Observable( writeOutsideTransaction = true )
   public abstract int getCurrentStep();
 
   abstract void setCurrentStep( int currentStep );
-
-  @Action
-  public void incCurrentStep()
-  {
-    setCurrentStep( ( getCurrentStep() + 1 ) % MAX_STEPS );
-  }
 
   @Observable
   public abstract boolean isRunning();
@@ -112,36 +104,53 @@ public abstract class DrumMachine
   @Action
   public void toggleRunning()
   {
-    setRunning( !isRunning() );
-    setCurrentStep( 0 );
-  }
-
-  @Observe
-  void manageTimer()
-  {
-    final boolean running = isRunning();
-    if ( running && null == _timerId )
+    final boolean running = !isRunning();
+    setRunning( running );
+    setCurrentStep( MAX_STEPS - 1 );
+    if ( running )
     {
-      startTimer();
-    }
-    else if ( !running && null != _timerId )
-    {
-      cancelTimer();
+      playBeat();
     }
   }
 
-  private void startTimer()
+  private void playSoundAt( @Nonnull final AudioBuffer buffer )
   {
-    assert null == _timerId;
-    final double delay = 60.0 * 1000 / _bpm;
-    _timerId = DomGlobal.setInterval( v -> incCurrentStep(), delay );
+    final GainNode gain = _audioContext.createGain();
+    gain.gain.value = 0.2;
+    gain.connect( _audioContext.destination );
+    final AudioBufferSourceNode node = _audioContext.createBufferSource();
+    node.buffer = buffer;
+    node.connect( gain );
+    node.start();
   }
 
-  private void cancelTimer()
+  @Action
+  void playBeat()
   {
-    assert null != _timerId;
-    DomGlobal.clearInterval( _timerId );
-    _timerId = null;
+    if ( isRunning() )
+    {
+      final int nextStep = ( getCurrentStep() + 1 ) % MAX_STEPS;
+
+      for ( final Track track : getTracks() )
+      {
+        final StepCell cell = track.getStepCells().get( nextStep );
+        if ( cell.on() )
+        {
+          if ( cell.doubled() )
+          {
+            playSoundAt( track.getAudioBuffer() );
+            DomGlobal.setTimeout( v -> playSoundAt( track.getAudioBuffer() ), 100 );
+          }
+          else
+          {
+            playSoundAt( track.getAudioBuffer() );
+          }
+        }
+      }
+
+      setCurrentStep( nextStep );
+      DomGlobal.setTimeout( v -> playBeat(), 60.0 / _bpm * 1000.0 );
+    }
   }
 
   @Nonnull
