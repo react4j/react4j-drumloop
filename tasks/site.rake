@@ -15,18 +15,18 @@ SITE_DIR = "#{WORKSPACE_DIR}/reports/site"
 desc 'Build the part of the website for this branch'
 task 'site:build' do
   project = Buildr.project('react4j-drumloop')
-  branch = ENV['SITE_BRANCH'] || `git rev-parse --abbrev-ref HEAD`.strip
-  base_dir = "#{SITE_DIR}/#{branch}"
-  rm_rf base_dir
-  mkdir_p base_dir
+  rm_rf SITE_DIR
+  mkdir_p SITE_DIR
+
+  cp_r Dir["#{project._('docs')}/*"], SITE_DIR
 
   %w(react4j.drumloop.DrumLoopDev react4j.drumloop.DrumLoopProd).each do |dir|
     output_dir = project._(:target, :generated, :gwt, dir)
     file(output_dir).invoke
-    cp_r Dir["#{output_dir}/*"], base_dir
-    rm_f Dir["#{base_dir}/**/*.devmode.js"]
-    rm_f Dir["#{base_dir}/**/compilation-mappings.txt"]
-    rm_rf "#{base_dir}/WEB-INF"
+    cp_r Dir["#{output_dir}/*"], SITE_DIR
+    rm_f Dir["#{SITE_DIR}/**/*.devmode.js"]
+    rm_f Dir["#{SITE_DIR}/**/compilation-mappings.txt"]
+    rm_rf "#{SITE_DIR}/WEB-INF"
   end
 end
 
@@ -40,20 +40,16 @@ task 'site:deploy' => ['site:build'] do
   end
 
   local_dir = "#{WORKSPACE_DIR}/target/remote_site"
-  # This is only invoked on selected branches if running out of Travis
-  # in which case SITE_BRANCH is set
-  branch = ENV['SITE_BRANCH'] || `git rev-parse --abbrev-ref HEAD`.strip
   rm_rf local_dir
 
   sh "git clone -b master --depth 1 #{origin_url} #{local_dir}"
 
   in_dir(local_dir) do
-    message =
-      "Update website based on source branch #{branch}#{travis_build_number.nil? ? '' : " - Travis build: #{travis_build_number}"}"
+    message ="Update DrumLoop website#{travis_build_number.nil? ? '' : " - Travis build: #{travis_build_number}"}"
 
-    rm_rf "#{local_dir}/drumloop/#{branch}"
+    rm_rf "#{local_dir}/drumloop"
     mkdir_p "#{local_dir}/drumloop"
-    cp_r "#{SITE_DIR}/#{branch}", "#{local_dir}/drumloop/#{branch}"
+    cp_r Dir["#{SITE_DIR}/*"], "#{local_dir}/drumloop"
     sh 'git add . -f'
     puts `git commit -m "#{message}"`
     if 0 == $?.exitstatus
