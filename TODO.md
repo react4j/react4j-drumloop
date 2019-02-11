@@ -4,15 +4,8 @@ This document is essentially a list of shorthand notes describing work yet to co
 Unfortunately it is not complete enough for other people to pick work off the list and
 complete as there is too much un-said.
 
-
-* Get audio working
-
-* Incorporate notes from https://www.smashingmagazine.com/2016/08/how-to-create-a-responsive-8-bit-drum-machine-using-web-audio-svg-and-multitouch/
-
 * Publish output into GitHub Pages branch. Make sure repository url points at it and it is
   added to the readme.
-
-* Move beat update to a more accurate timer from WebAudio API?
 
 * Add project into compile tests for react4j/arez?
 
