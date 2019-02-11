@@ -112,14 +112,17 @@ abstract class FxButton
   {
     final AudioBufferSourceNode node = newAudioNode();
     node.loop = loop;
-    node.onended = e -> {
-      if ( !node.loop )
-      {
-        stop();
-      }
-    };
+    node.onended = e -> stopUnlessLooping( node );
     node.start( 0 );
     _node = node;
+  }
+
+  private void stopUnlessLooping( @Nonnull final AudioBufferSourceNode node )
+  {
+    if ( !node.loop )
+    {
+      stop();
+    }
   }
 
   private void loop()
