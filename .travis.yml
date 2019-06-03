@@ -2,7 +2,7 @@ language: ruby
 jdk:
 - oraclejdk11
 rvm:
-- 2.3.1
+- 2.6.3
 before_install:
 - openssl aes-256-cbc -K $encrypted_b42658219073_key -iv $encrypted_b42658219073_iv
   -in etc/secrets -out ../secrets.tar -d
@@ -10,7 +10,7 @@ before_install:
 - chmod 600 ../deploy
 - eval `ssh-agent -s` && ssh-add ../deploy
 install:
-- rvm use 2.3.1
+- rvm use 2.6.3
 - gem install bundler
 - bundle install
 script: buildr package site:deploy_if_candidate_branch
