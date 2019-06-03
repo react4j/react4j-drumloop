@@ -1,7 +1,7 @@
 dist: trusty
 language: ruby
 jdk:
-- oraclejdk11
+- oraclejdk8
 rvm:
 - 2.3.1
 before_install:
