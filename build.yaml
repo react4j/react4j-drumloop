@@ -19,10 +19,10 @@ artifacts:
 
   jsinterop_base: com.google.jsinterop:base:jar:1.0.0
 
-  elemental2_core: org.realityforge.com.google.elemental2:elemental2-core:jar:2.25
-  elemental2_dom: org.realityforge.com.google.elemental2:elemental2-dom:jar:2.25
-  elemental2_promise: org.realityforge.com.google.elemental2:elemental2-promise:jar:2.25
-  elemental2_media: org.realityforge.com.google.elemental2:elemental2-media:jar:2.25
+  elemental2_core: org.realityforge.com.google.elemental2:elemental2-core:jar:2.27
+  elemental2_dom: org.realityforge.com.google.elemental2:elemental2-dom:jar:2.27
+  elemental2_promise: org.realityforge.com.google.elemental2:elemental2-promise:jar:2.27
+  elemental2_media: org.realityforge.com.google.elemental2:elemental2-media:jar:2.27
 
   react4j_core: org.realityforge.react4j:react4j-core:jar:0.141
   react4j_dom: org.realityforge.react4j:react4j-dom:jar:0.141
@@ -45,7 +45,7 @@ artifacts:
   javapoet: com.squareup:javapoet:jar:1.11.1
   guava: com.google.guava:guava:jar:25.0-jre
 
-  dagger_gwt: org.realityforge.dagger:dagger-gwt-lite:jar:2.25.2-rf1
+  dagger_gwt: org.realityforge.dagger:dagger-gwt-lite:jar:2.27.2-rf1
 
   javax_inject: javax.inject:javax.inject:jar:1
   javax_inject_sources: javax.inject:javax.inject:jar:sources:1
