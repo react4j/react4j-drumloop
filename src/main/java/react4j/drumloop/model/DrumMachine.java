@@ -2,6 +2,7 @@ package react4j.drumloop.model;
 
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
+import arez.annotations.Feature;
 import arez.annotations.Observable;
 import arez.component.CollectionsUtil;
 import elemental2.dom.DomGlobal;
@@ -80,7 +81,7 @@ public abstract class DrumMachine
     return _audioCache;
   }
 
-  @Observable( writeOutsideTransaction = true )
+  @Observable( writeOutsideTransaction = Feature.ENABLE )
   public int getBpm()
   {
     return _bpm;
@@ -91,7 +92,7 @@ public abstract class DrumMachine
     _bpm = bpm;
   }
 
-  @Observable( writeOutsideTransaction = true )
+  @Observable( writeOutsideTransaction = Feature.ENABLE )
   public abstract int getCurrentStep();
 
   abstract void setCurrentStep( int currentStep );
