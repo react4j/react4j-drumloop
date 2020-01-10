@@ -1,10 +1,10 @@
 package react4j.drumloop.model;
 
+import arez.Arez;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
 import arez.annotations.Feature;
 import arez.annotations.Observable;
-import arez.component.CollectionsUtil;
 import elemental2.dom.DomGlobal;
 import elemental2.dom.Response;
 import elemental2.media.AudioBuffer;
@@ -13,6 +13,7 @@ import elemental2.media.AudioContext;
 import elemental2.media.GainNode;
 import elemental2.promise.Promise;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.inject.Singleton;
@@ -56,13 +57,13 @@ public abstract class DrumMachine
   @Nonnull
   public final List<Track> getTracks()
   {
-    return CollectionsUtil.wrap( _tracks );
+    return Arez.areCollectionsPropertiesUnmodifiable() ? Collections.unmodifiableList( _tracks ) : _tracks;
   }
 
   @Nonnull
   public List<SoundEffect> getEffects()
   {
-    return CollectionsUtil.wrap( _effects );
+    return Arez.areCollectionsPropertiesUnmodifiable() ? Collections.unmodifiableList( _effects ) : _effects;
   }
 
   @Nonnull

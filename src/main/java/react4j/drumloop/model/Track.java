@@ -1,7 +1,8 @@
 package react4j.drumloop.model;
 
-import arez.component.CollectionsUtil;
+import arez.Arez;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 
@@ -24,6 +25,6 @@ public final class Track
   @Nonnull
   public List<StepCell> getStepCells()
   {
-    return CollectionsUtil.wrap( _stepCells );
+    return Arez.areCollectionsPropertiesUnmodifiable() ? Collections.unmodifiableList( _stepCells ) : _stepCells;
   }
 }
