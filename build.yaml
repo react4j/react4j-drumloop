@@ -34,7 +34,7 @@ artifacts:
 
   braincheck: org.realityforge.braincheck:braincheck:jar:1.25.0
 
-  grim_annotations: org.realityforge.grim:grim-annotations:jar:0.03
+  grim_annotations: org.realityforge.grim:grim-annotations:jar:0.04
 
   dagger_core: com.google.dagger:dagger:jar:2.25.2
   dagger_producers: com.google.dagger:dagger-producers:jar:2.25.2
