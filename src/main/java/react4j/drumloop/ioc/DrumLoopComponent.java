@@ -1,4 +1,4 @@
-package react4j.drumloop.dagger;
+package react4j.drumloop.ioc;
 
 import dagger.Component;
 import javax.annotation.Nonnull;

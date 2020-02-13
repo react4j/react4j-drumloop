@@ -4,7 +4,7 @@ import com.google.gwt.core.client.EntryPoint;
 import elemental2.dom.DomGlobal;
 import react4j.ReactElement;
 import react4j.dom.ReactDOM;
-import react4j.drumloop.dagger.DrumLoopComponent;
+import react4j.drumloop.ioc.DrumLoopComponent;
 import react4j.drumloop.views.DrumMachineViewBuilder;
 
 public class App
