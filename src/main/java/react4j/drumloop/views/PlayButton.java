@@ -2,7 +2,6 @@ package react4j.drumloop.views;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;

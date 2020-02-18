@@ -16,11 +16,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
-import javax.inject.Singleton;
 import react4j.drumloop.ReactCache;
 
-@Singleton
-@ArezComponent
+@ArezComponent( service = Feature.ENABLE )
 public abstract class DrumMachine
 {
   private static final int INITIAL_BPM = 65;
