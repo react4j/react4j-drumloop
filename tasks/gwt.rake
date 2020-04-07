@@ -54,6 +54,9 @@ CONTENT
     dependencies += [dir]
   end
 
+  # Duplicate the assets as the following gwt task will add compile output to asset path
+  # which we typically do NOT want to include in jar
+  assets = project.assets.paths.dup
   if ENV['GWT'].nil? || ENV['GWT'] == project.name
     modules = modules_complete ? gwt_modules : gwt_modules.collect {|gwt_module| "#{gwt_module}Test"}
     modules.each do |m|
@@ -62,6 +65,7 @@ CONTENT
       project.gwt([m], { :java_args => %w(-Xms512M -Xmx1024M -Dgwt.watchFileChanges=false),
                          :dependencies => dependencies,
                          :gwtc_args => gwtc_args,
+                         :skip_merge_gwt_dependencies => true,
                          :compile_report_dir => compile_report_dir.nil? ? nil : "#{compile_report_dir}/#{output_key}",
                          :output_key => output_key })
     end
