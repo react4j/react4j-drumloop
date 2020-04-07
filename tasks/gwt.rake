@@ -68,9 +68,11 @@ CONTENT
 
   project.package(:jar).tap do |j|
     extra_deps.each do |dep|
-      j.include("#{dep}/*")
+      j.enhance([dep])
+      j.include("#{dep}/react4j")
     end
-    project.assets.paths.each do |path|
+    j.include(project._(:generated, 'processors/main/java/react4j')) if project.enable_annotation_processor?
+    assets.each do |path|
       j.include("#{path}/*")
     end
     j.include("#{project._(:source, :main, :java)}/*")
