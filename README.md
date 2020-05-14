@@ -1,6 +1,6 @@
 # React4j DrumLoop
 
-[![Build Status](https://secure.travis-ci.org/react4j/react4j-drumloop.png?branch=master)](http://travis-ci.org/react4j/react4j-drumloop)
+[![Build Status](https://api.travis-ci.com/react4j/react4j-drumloop.png?branch=master)](http://travis-ci.org/react4j/react4j-drumloop)
 
 An experimental drum machine UI derived from the [hooks-drum-machine](https://github.com/kenwheeler/hooks-drum-machine)
 used to experiment with a few different Arez and React4j features. The source code has been vendored into
