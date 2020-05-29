@@ -41,12 +41,12 @@ public abstract class StepCell
     return String.valueOf( beat() );
   }
 
-  public final boolean on()
+  public boolean on()
   {
     return getState() != STATE_OFF;
   }
 
-  public final boolean doubled()
+  public boolean doubled()
   {
     return getState() == STATE_DOUBLED;
   }

@@ -53,7 +53,7 @@ public abstract class DrumMachine
   }
 
   @Nonnull
-  public final List<Track> getTracks()
+  public List<Track> getTracks()
   {
     return Arez.areCollectionsPropertiesUnmodifiable() ? Collections.unmodifiableList( _tracks ) : _tracks;
   }
@@ -75,7 +75,7 @@ public abstract class DrumMachine
   }
 
   @Nonnull
-  final ReactCache.Resource<String, AudioBuffer> getAudioCache()
+  ReactCache.Resource<String, AudioBuffer> getAudioCache()
   {
     return _audioCache;
   }

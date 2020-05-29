@@ -34,7 +34,7 @@ abstract class FxButton
   abstract void setHeld( boolean held );
 
   @PreDispose
-  final void preDispose()
+  void preDispose()
   {
     stop();
   }
