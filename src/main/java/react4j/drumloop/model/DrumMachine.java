@@ -28,9 +28,9 @@ public abstract class DrumMachine
   @Nonnull
   private final AudioContext _audioContext;
   @Nonnull
-  private final ArrayList<Track> _tracks = new ArrayList<>();
+  private final List<Track> _tracks = new ArrayList<>();
   @Nonnull
-  private final ArrayList<SoundEffect> _effects = new ArrayList<>();
+  private final List<SoundEffect> _effects = new ArrayList<>();
   private int _bpm = INITIAL_BPM;
   @Nonnull
   private final ReactCache.Resource<String, AudioBuffer> _audioCache;
