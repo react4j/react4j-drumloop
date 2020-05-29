@@ -1,11 +1,12 @@
 package react4j.drumloop.model;
 
 import arez.annotations.ArezComponent;
+import arez.annotations.Feature;
 import arez.annotations.Observable;
 import javax.annotation.Nonnull;
 import react4j.Keyed;
 
-@ArezComponent
+@ArezComponent( requireId = Feature.DISABLE, disposeNotifier = Feature.DISABLE )
 public abstract class StepCell
   implements Keyed
 {
