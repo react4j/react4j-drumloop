@@ -4,13 +4,13 @@ import arez.annotations.Action;
 import javax.annotation.Nonnull;
 import react4j.ReactNode;
 import react4j.annotations.Prop;
-import react4j.annotations.ReactComponent;
 import react4j.annotations.Render;
+import react4j.annotations.View;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.drumloop.model.StepCell;
 import static react4j.dom.DOM.*;
 
-@ReactComponent( type = ReactComponent.Type.TRACKING )
+@View( type = View.Type.TRACKING )
 public abstract class StepButton
 {
   @Prop( immutable = true )

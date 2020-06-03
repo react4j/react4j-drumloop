@@ -11,13 +11,13 @@ import javax.annotation.Nullable;
 import jsinterop.base.Js;
 import react4j.ReactNode;
 import react4j.annotations.Prop;
-import react4j.annotations.ReactComponent;
 import react4j.annotations.Render;
+import react4j.annotations.View;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.drumloop.model.SoundEffect;
 import static react4j.dom.DOM.*;
 
-@ReactComponent( type = ReactComponent.Type.TRACKING )
+@View( type = View.Type.TRACKING )
 abstract class FxButton
 {
   @Nullable

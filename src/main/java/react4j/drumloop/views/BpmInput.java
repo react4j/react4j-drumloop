@@ -4,15 +4,15 @@ import elemental2.dom.HTMLInputElement;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import react4j.ReactNode;
-import react4j.annotations.ReactComponent;
 import react4j.annotations.Render;
+import react4j.annotations.View;
 import react4j.dom.events.FormEvent;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
 import react4j.drumloop.model.DrumMachine;
 import static react4j.dom.DOM.*;
 
-@ReactComponent( type = ReactComponent.Type.TRACKING )
+@View( type = View.Type.TRACKING )
 public abstract class BpmInput
 {
   @Nonnull
