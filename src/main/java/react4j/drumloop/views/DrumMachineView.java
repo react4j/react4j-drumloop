@@ -1,5 +1,6 @@
 package react4j.drumloop.views;
 
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import react4j.Component;
@@ -18,7 +19,7 @@ public abstract class DrumMachineView
 
   DrumMachineView( @Nonnull final DrumMachine drumMachine )
   {
-    _drumMachine = drumMachine;
+    _drumMachine = Objects.requireNonNull( drumMachine );
   }
 
   @Nullable

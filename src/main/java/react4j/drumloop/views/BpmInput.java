@@ -1,6 +1,7 @@
 package react4j.drumloop.views;
 
 import elemental2.dom.HTMLInputElement;
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import react4j.Component;
@@ -21,7 +22,7 @@ public abstract class BpmInput
 
   BpmInput( @Nonnull final DrumMachine drumMachine )
   {
-    _drumMachine = drumMachine;
+    _drumMachine = Objects.requireNonNull( drumMachine );
   }
 
   private void onBpmChange( @Nonnull final FormEvent e )
