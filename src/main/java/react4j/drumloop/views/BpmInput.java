@@ -3,10 +3,9 @@ package react4j.drumloop.views;
 import elemental2.dom.HTMLInputElement;
 import java.util.Objects;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
+import react4j.annotations.Render;
 import react4j.dom.events.FormEvent;
 import react4j.dom.proptypes.html.InputProps;
 import react4j.dom.proptypes.html.attributeTypes.InputType;
@@ -15,7 +14,6 @@ import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.TRACKING )
 public abstract class BpmInput
-  extends Component
 {
   @Nonnull
   private final DrumMachine _drumMachine;
@@ -30,9 +28,9 @@ public abstract class BpmInput
     _drumMachine.setBpm( Integer.parseInt( ( (HTMLInputElement) e.getTarget() ).value ) );
   }
 
-  @Nullable
-  @Override
-  protected ReactNode render()
+  @Render
+  @Nonnull
+  ReactNode render()
   {
     return input( new InputProps()
                     .className( "bpmInput" )

@@ -9,17 +9,16 @@ import elemental2.media.GainNode;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import jsinterop.base.Js;
-import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.Prop;
 import react4j.annotations.ReactComponent;
+import react4j.annotations.Render;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.drumloop.model.SoundEffect;
 import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.TRACKING )
 abstract class FxButton
-  extends Component
 {
   @Nullable
   private AudioBufferSourceNode _node;
@@ -39,9 +38,9 @@ abstract class FxButton
     stop();
   }
 
-  @Nullable
-  @Override
-  protected ReactNode render()
+  @Render
+  @Nonnull
+  ReactNode render()
   {
     final SoundEffect sound = sound();
     sound.suspendUntilAudioLoaded();

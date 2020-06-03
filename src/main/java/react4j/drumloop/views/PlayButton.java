@@ -2,17 +2,15 @@ package react4j.drumloop.views;
 
 import java.util.Objects;
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import react4j.Component;
 import react4j.ReactNode;
 import react4j.annotations.ReactComponent;
+import react4j.annotations.Render;
 import react4j.dom.proptypes.html.BtnProps;
 import react4j.drumloop.model.DrumMachine;
 import static react4j.dom.DOM.*;
 
 @ReactComponent( type = ReactComponent.Type.TRACKING )
 abstract class PlayButton
-  extends Component
 {
   @Nonnull
   private final DrumMachine _drumMachine;
@@ -22,9 +20,9 @@ abstract class PlayButton
     _drumMachine = Objects.requireNonNull( drumMachine );
   }
 
-  @Nullable
-  @Override
-  protected ReactNode render()
+  @Render
+  @Nonnull
+  ReactNode render()
   {
     final boolean on = _drumMachine.isRunning();
     return button( new BtnProps()
