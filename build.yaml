@@ -23,9 +23,9 @@ artifacts:
   elemental2_promise: org.realityforge.com.google.elemental2:elemental2-promise:jar:2.27
   elemental2_media: org.realityforge.com.google.elemental2:elemental2-media:jar:2.27
 
-  react4j_core: org.realityforge.react4j:react4j-core:jar:0.164
-  react4j_dom: org.realityforge.react4j:react4j-dom:jar:0.164
-  react4j_processor: org.realityforge.react4j:react4j-processor:jar:0.164
+  react4j_core: org.realityforge.react4j:react4j-core:jar:0.165
+  react4j_dom: org.realityforge.react4j:react4j-dom:jar:0.165
+  react4j_processor: org.realityforge.react4j:react4j-processor:jar:0.165
 
   arez_core: org.realityforge.arez:arez-core:jar:0.182
   arez_processor: org.realityforge.arez:arez-processor:jar:0.182
