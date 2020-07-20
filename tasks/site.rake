@@ -49,7 +49,7 @@ task 'site:deploy' => ['site:build'] do
 
     rm_rf "#{local_dir}/drumloop"
     mkdir_p "#{local_dir}/drumloop"
-    cp_r Dir["#{SITE_DIR}/drumloop"], "#{local_dir}/drumloop"
+    cp_r Dir["#{SITE_DIR}/drumloop"], local_dir
     sh 'git add . -f'
     puts `git commit -m "#{message}"`
     if 0 == $?.exitstatus
