@@ -129,7 +129,6 @@ abstract class FxButton
     if ( null != _node )
     {
       _node.loop = true;
-      Js.debugger();
     }
     else
     {
