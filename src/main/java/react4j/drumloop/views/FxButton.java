@@ -8,7 +8,6 @@ import elemental2.media.AudioContext;
 import elemental2.media.GainNode;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import jsinterop.base.Js;
 import react4j.ReactNode;
 import react4j.annotations.Input;
 import react4j.annotations.Render;
