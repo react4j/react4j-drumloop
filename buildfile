@@ -26,6 +26,7 @@ define 'react4j-drumloop' do
                :elemental2_media,
                :braincheck,
                :grim_annotations,
+               :zemeckis,
                :react4j_core,
                :react4j_dom,
                :arez_core,
