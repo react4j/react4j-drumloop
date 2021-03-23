@@ -1,6 +1,6 @@
 package react4j.drumloop;
 
-import elemental2.promise.Promise;
+import akasha.promise.Promise;
 import javaemul.internal.annotations.DoNotAutobox;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsFunction;

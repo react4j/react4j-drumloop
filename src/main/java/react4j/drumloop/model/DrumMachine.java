@@ -1,17 +1,17 @@
 package react4j.drumloop.model;
 
+import akasha.Global;
+import akasha.Response;
+import akasha.audio.AudioBuffer;
+import akasha.audio.AudioBufferSourceNode;
+import akasha.audio.AudioContext;
+import akasha.audio.GainNode;
 import arez.Arez;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
 import arez.annotations.Feature;
 import arez.annotations.Observable;
-import elemental2.dom.DomGlobal;
-import elemental2.dom.Response;
-import elemental2.media.AudioBuffer;
-import elemental2.media.AudioBufferSourceNode;
-import elemental2.media.AudioContext;
-import elemental2.media.GainNode;
-import elemental2.promise.Promise;
+import akasha.promise.Promise;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -67,7 +67,7 @@ public abstract class DrumMachine
   @Nonnull
   public AudioContext getActiveAudioContext()
   {
-    if ( "suspended".equals( _audioContext.state ) )
+    if ( "suspended".equals( _audioContext.state() ) )
     {
       _audioContext.resume();
     }
@@ -116,8 +116,8 @@ public abstract class DrumMachine
   private void playSoundAt( @Nonnull final AudioBuffer buffer )
   {
     final GainNode gain = _audioContext.createGain();
-    gain.gain.value = 0.2;
-    gain.connect( _audioContext.destination );
+    gain.gain().value = 0.2F;
+    gain.connect( _audioContext.destination() );
     final AudioBufferSourceNode node = _audioContext.createBufferSource();
     node.buffer = buffer;
     node.connect( gain );
@@ -139,7 +139,7 @@ public abstract class DrumMachine
           if ( cell.doubled() )
           {
             playSoundAt( track.getAudioBuffer() );
-            DomGlobal.setTimeout( v -> playSoundAt( track.getAudioBuffer() ), 100 );
+            Global.setTimeout( () -> playSoundAt( track.getAudioBuffer() ), 100 );
           }
           else
           {
@@ -149,14 +149,14 @@ public abstract class DrumMachine
       }
 
       setCurrentStep( nextStep );
-      DomGlobal.setTimeout( v -> playBeat(), 60.0 / _bpm * 1000.0 );
+      Global.setTimeout( this::playBeat, 60 / _bpm * 1000 );
     }
   }
 
   @Nonnull
   private Promise<AudioBuffer> loadAudioData( @Nonnull final String sound )
   {
-    return DomGlobal
+    return Global
       .fetch( sound )
       .then( Response::arrayBuffer )
       .then( _audioContext::decodeAudioData );

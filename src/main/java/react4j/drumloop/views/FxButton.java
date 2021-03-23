@@ -1,11 +1,11 @@
 package react4j.drumloop.views;
 
+import akasha.audio.AudioBufferSourceNode;
+import akasha.audio.AudioContext;
+import akasha.audio.GainNode;
 import arez.annotations.Action;
 import arez.annotations.Observable;
 import arez.annotations.PreDispose;
-import elemental2.media.AudioBufferSourceNode;
-import elemental2.media.AudioContext;
-import elemental2.media.GainNode;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import react4j.ReactNode;
@@ -92,8 +92,8 @@ abstract class FxButton
     node.buffer = sound.getAudioBuffer();
     final GainNode gain = audioContext.createGain();
     node.connect( gain );
-    gain.gain.value = 0.2;
-    gain.connect( audioContext.destination );
+    gain.gain().value = 0.2F;
+    gain.connect( audioContext.destination() );
     return node;
   }
 

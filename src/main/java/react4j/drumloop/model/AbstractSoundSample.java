@@ -1,6 +1,6 @@
 package react4j.drumloop.model;
 
-import elemental2.media.AudioBuffer;
+import akasha.audio.AudioBuffer;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

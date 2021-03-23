@@ -1,6 +1,6 @@
 package react4j.drumloop.views;
 
-import elemental2.dom.HTMLInputElement;
+import akasha.HTMLInputElement;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import react4j.ReactNode;
