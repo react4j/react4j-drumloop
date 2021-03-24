@@ -34,5 +34,5 @@ artifacts:
 
   zemeckis: org.realityforge.zemeckis:zemeckis-core:jar:0.09
 
-  sting_core: org.realityforge.sting:sting-core:jar:0.16
-  sting_processor: org.realityforge.sting:sting-processor:jar:0.16
+  sting_core: org.realityforge.sting:sting-core:jar:0.17
+  sting_processor: org.realityforge.sting:sting-processor:jar:0.17
