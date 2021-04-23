@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 import react4j.drumloop.ReactCache;
+import zemeckis.Zemeckis;
 
 @ArezComponent( service = Feature.ENABLE, requireId = Feature.DISABLE, disposeNotifier = Feature.DISABLE )
 public abstract class DrumMachine
@@ -139,7 +140,7 @@ public abstract class DrumMachine
           if ( cell.doubled() )
           {
             playSoundAt( track.getAudioBuffer() );
-            Global.setTimeout( () -> playSoundAt( track.getAudioBuffer() ), 100 );
+            Zemeckis.delayedTask( () -> playSoundAt( track.getAudioBuffer() ), 100 );
           }
           else
           {
@@ -149,7 +150,7 @@ public abstract class DrumMachine
       }
 
       setCurrentStep( nextStep );
-      Global.setTimeout( this::playBeat, 60 / _bpm * 1000 );
+      Zemeckis.delayedTask( this::playBeat, 60 / _bpm * 1000 );
     }
   }
 
