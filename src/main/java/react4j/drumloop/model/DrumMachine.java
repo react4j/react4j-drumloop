@@ -1,7 +1,7 @@
 package react4j.drumloop.model;
 
-import akasha.Global;
 import akasha.Response;
+import akasha.WindowGlobal;
 import akasha.audio.AudioBuffer;
 import akasha.audio.AudioBufferSourceNode;
 import akasha.audio.AudioContext;
@@ -157,7 +157,7 @@ public abstract class DrumMachine
   @Nonnull
   private Promise<AudioBuffer> loadAudioData( @Nonnull final String sound )
   {
-    return Global
+    return WindowGlobal
       .fetch( sound )
       .then( Response::arrayBuffer )
       .then( _audioContext::decodeAudioData );

@@ -1,7 +1,7 @@
 package react4j.drumloop;
 
 import akasha.Element;
-import akasha.Global;
+import akasha.WindowGlobal;
 import com.google.gwt.core.client.EntryPoint;
 import react4j.ReactElement;
 import react4j.dom.ReactDOM;
@@ -20,7 +20,7 @@ public class App
     // TODO: Having to add the next line feels super bad. Other frameworks (VueJS/Angular2+)
     // combine the next two steps with the instance render and injection setup combined
     DrumLoopInjector.create();
-    final Element element = Global.document().getElementById( "app" );
+    final Element element = WindowGlobal.document().getElementById( "app" );
     assert null != element;
     ReactDOM
       .createRoot( element )
