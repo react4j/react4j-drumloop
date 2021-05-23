@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'realityforge-buildr', '= 1.5.16'
+gem 'realityforge-buildr', '= 1.5.17'
 gem 'zapwhite', '= 2.19.0'
 gem 'braid', '= 1.1.2'
