@@ -18,7 +18,7 @@ artifacts:
 
   jsinterop_base: com.google.jsinterop:base:jar:1.0.0
 
-  akasha: org.realityforge.akasha:akasha-gwt:jar:0.22
+  akasha: org.realityforge.akasha:akasha-gwt:jar:0.24
 
   react4j_core: org.realityforge.react4j:react4j-core:jar:0.184
   react4j_dom: org.realityforge.react4j:react4j-dom:jar:0.184
