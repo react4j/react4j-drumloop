@@ -33,7 +33,7 @@ artifacts:
 
   grim_annotations: org.realityforge.grim:grim-annotations:jar:0.09
 
-  zemeckis: org.realityforge.zemeckis:zemeckis-core:jar:0.13
+  zemeckis: org.realityforge.zemeckis:zemeckis-core:jar:0.14
 
   sting_core: org.realityforge.sting:sting-core:jar:0.25
   sting_processor: org.realityforge.sting:sting-processor:jar:0.25
