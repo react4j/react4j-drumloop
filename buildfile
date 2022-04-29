@@ -5,8 +5,8 @@ require 'buildr/gwt'
 desc 'React4j Drum Machine experiment'
 define 'react4j-drumloop' do
   project.group = 'org.realityforge.react4j.drumloop'
-  compile.options.source = '1.8'
-  compile.options.target = '1.8'
+  compile.options.source = '17'
+  compile.options.target = '17'
   compile.options.lint = 'all,-processing,-serial'
   project.compile.options.warnings = true
   project.compile.options.other = %w(-Werror -Xmaxerrs 10000 -Xmaxwarns 10000)
