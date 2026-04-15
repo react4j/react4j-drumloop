@@ -16,7 +16,7 @@ public abstract class TrackView
   @Nonnull
   final Track _track;
 
-  TrackView( @Input( immutable = true ) @Nonnull final Track track )
+  TrackView( @Input @Nonnull final Track track )
   {
     _track = Objects.requireNonNull( track );
   }
