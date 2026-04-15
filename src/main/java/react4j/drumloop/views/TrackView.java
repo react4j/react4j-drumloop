@@ -1,5 +1,6 @@
 package react4j.drumloop.views;
 
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import react4j.ReactNode;
 import react4j.annotations.Input;
@@ -12,22 +13,25 @@ import static react4j.dom.DOM.*;
 @View
 public abstract class TrackView
 {
-  @Input( immutable = true )
   @Nonnull
-  abstract Track track();
+  final Track _track;
+
+  TrackView( @Input( immutable = true ) @Nonnull final Track track )
+  {
+    _track = Objects.requireNonNull( track );
+  }
 
   @Render
   @Nonnull
   ReactNode render()
   {
-    final Track track = track();
-    track.suspendUntilAudioLoaded();
+    _track.suspendUntilAudioLoaded();
     return div( new HtmlProps().className( "track" ),
                 div( new HtmlProps().className( "track_info" ),
-                     h2( new HtmlProps().className( "track_title" ), track.getName() )
+                     h2( new HtmlProps().className( "track_title" ), _track.getName() )
                 ),
                 div( new HtmlProps().className( "step_row" ),
-                     fragment( track.getStepCells().stream().map( StepButtonBuilder::cell ) )
+                     fragment( _track.getStepCells().stream().map( StepButtonBuilder::cell ) )
                 )
     );
   }

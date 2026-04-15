@@ -1,6 +1,8 @@
 package react4j.drumloop.views;
 
 import arez.annotations.Action;
+import arez.annotations.ComponentDependency;
+import java.util.Objects;
 import javax.annotation.Nonnull;
 import react4j.ReactNode;
 import react4j.annotations.Input;
@@ -13,49 +15,52 @@ import static react4j.dom.DOM.*;
 @View( type = View.Type.TRACKING )
 public abstract class StepButton
 {
-  @Input( immutable = true )
+  @ComponentDependency
   @Nonnull
-  abstract StepCell cell();
+  final StepCell _cell;
+
+  StepButton( @Input( immutable = true ) @Nonnull final StepCell cell )
+  {
+    _cell = Objects.requireNonNull( cell );
+  }
 
   @Render
   @Nonnull
   ReactNode render()
   {
-    final StepCell cell = cell();
-    final boolean oddBar = ( cell.beat() / 4 ) % 2 == 1;
+    final boolean oddBar = ( _cell.beat() / 4 ) % 2 == 1;
     return button( new BtnProps()
                      .className( "step_button",
                                  oddBar ? "step_button_odd" : null,
-                                 cell.on() ? "step_button_on" : null,
-                                 cell.doubled() ? "step_button_doubled" : null )
+                                 _cell.on() ? "step_button_on" : null,
+                                 _cell.doubled() ? "step_button_doubled" : null )
                      .onClick( e -> toggleCell( e.isShiftKey() ) ) );
   }
 
   @Action
   void toggleCell( final boolean shiftKey )
   {
-    final StepCell cell = cell();
-    final boolean on = cell.on();
+    final boolean on = _cell.on();
     if ( on )
     {
-      if ( shiftKey && !cell.doubled() )
+      if ( shiftKey && !_cell.doubled() )
       {
-        cell.setDoubled();
+        _cell.setDoubled();
       }
       else
       {
-        cell.setOff();
+        _cell.setOff();
       }
     }
     else
     {
       if ( shiftKey )
       {
-        cell.setDoubled();
+        _cell.setDoubled();
       }
       else
       {
-        cell.setOn();
+        _cell.setOn();
       }
     }
   }

@@ -19,12 +19,15 @@ import static react4j.dom.DOM.*;
 @View( type = View.Type.TRACKING )
 abstract class FxButton
 {
+  @Nonnull
+  private final SoundEffect _sound;
   @Nullable
   private AudioBufferSourceNode _node;
 
-  @Input( immutable = true )
-  @Nonnull
-  abstract SoundEffect sound();
+  FxButton( @Nonnull @Input( immutable = true ) final SoundEffect sound )
+  {
+    _sound = sound;
+  }
 
   @Observable()
   abstract boolean held();
@@ -41,15 +44,14 @@ abstract class FxButton
   @Nonnull
   ReactNode render()
   {
-    final SoundEffect sound = sound();
-    sound.suspendUntilAudioLoaded();
+    _sound.suspendUntilAudioLoaded();
     return button( new BtnProps()
                      .className( "button", held() ? "button_held" : null )
                      .onMouseDown( e -> playSound( e.isShiftKey() ) )
                      .onTouchStart( e -> playSound( e.isShiftKey() ) )
                      .onTouchEnd( e -> stopSound() )
                      .onMouseUp( e -> stopSound() ),
-                   sound.getName() );
+                   _sound.getName() );
   }
 
   @Action
@@ -86,10 +88,9 @@ abstract class FxButton
   @Nonnull
   private AudioBufferSourceNode newAudioNode()
   {
-    final SoundEffect sound = sound();
-    final AudioContext audioContext = sound.getDrumMachine().getActiveAudioContext();
+    final AudioContext audioContext = _sound.getDrumMachine().getActiveAudioContext();
     final AudioBufferSourceNode node = audioContext.createBufferSource();
-    node.buffer = sound.getAudioBuffer();
+    node.buffer = _sound.getAudioBuffer();
     final GainNode gain = audioContext.createGain();
     node.connect( gain );
     gain.gain().value = 0.2F;
