@@ -24,7 +24,7 @@ abstract class FxButton
   @Nullable
   private AudioBufferSourceNode _node;
 
-  FxButton( @Nonnull @Input( immutable = true ) final SoundEffect sound )
+  FxButton( @Nonnull @Input final SoundEffect sound )
   {
     _sound = sound;
   }

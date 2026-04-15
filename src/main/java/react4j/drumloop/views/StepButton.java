@@ -19,7 +19,7 @@ public abstract class StepButton
   @Nonnull
   final StepCell _cell;
 
-  StepButton( @Input( immutable = true ) @Nonnull final StepCell cell )
+  StepButton( @Input @Nonnull final StepCell cell )
   {
     _cell = Objects.requireNonNull( cell );
   }
