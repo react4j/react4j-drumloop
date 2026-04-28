@@ -13,7 +13,8 @@ import sting.Injector;
                         BpmInputFactory.class,
                         DrumMachineViewFactory.class,
                         IndicatorViewFactory.class,
-                        PlayButtonFactory.class } )
+                        PlayButtonFactory.class },
+           fragmentOnly = false )
 public interface DrumLoopInjector
 {
   @Nonnull
