@@ -9,8 +9,8 @@ import react4j.dom.proptypes.html.HtmlProps;
 import react4j.drumloop.model.DrumMachine;
 import static react4j.dom.DOM.*;
 
-@View
-public abstract class DrumMachineView
+@View( exportBuilder = true )
+abstract class DrumMachineView
 {
   @Nonnull
   private final DrumMachine _drumMachine;

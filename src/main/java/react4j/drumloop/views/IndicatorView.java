@@ -11,7 +11,7 @@ import react4j.drumloop.model.DrumMachine;
 import static react4j.dom.DOM.*;
 
 @View( type = View.Type.MAYBE_TRACKING )
-public abstract class IndicatorView
+abstract class IndicatorView
 {
   @Nonnull
   private final DrumMachine _drumMachine;

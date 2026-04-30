@@ -11,7 +11,7 @@ import react4j.drumloop.model.Track;
 import static react4j.dom.DOM.*;
 
 @View
-public abstract class TrackView
+abstract class TrackView
 {
   @Nonnull
   final Track _track;

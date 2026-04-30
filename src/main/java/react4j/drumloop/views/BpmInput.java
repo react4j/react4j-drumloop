@@ -13,7 +13,7 @@ import react4j.drumloop.model.DrumMachine;
 import static react4j.dom.DOM.*;
 
 @View( type = View.Type.TRACKING )
-public abstract class BpmInput
+abstract class BpmInput
 {
   @Nonnull
   private final DrumMachine _drumMachine;
