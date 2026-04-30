@@ -6,7 +6,7 @@ import com.google.gwt.core.client.EntryPoint;
 import react4j.ReactElement;
 import react4j.dom.ReactDOM;
 import react4j.drumloop.ioc.DrumLoopInjector;
-import react4j.drumloop.views.DrumMachineViewBuilder;
+import react4j.drumloop.views.DrumMachineBuilder;
 
 public class App
   implements EntryPoint
@@ -24,6 +24,6 @@ public class App
     assert null != element;
     ReactDOM
       .createRoot( element )
-      .render( ReactElement.createStrictMode( DrumMachineViewBuilder.build() ), null );
+      .render( ReactElement.createStrictMode( DrumMachineBuilder.build() ), null );
   }
 }
