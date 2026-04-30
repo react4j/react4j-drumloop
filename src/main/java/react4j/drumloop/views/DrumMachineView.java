@@ -33,10 +33,10 @@ abstract class DrumMachineView
                 suspense( p( "Loading..." ),
                           4000,
                           fragment( div( new HtmlProps().className( "stepSequencer" ),
-                                         IndicatorViewBuilder.build(),
+                                         IndicatorBuilder.build(),
                                          fragment( _drumMachine.getTracks()
                                                      .stream()
-                                                     .map( TrackViewBuilder::track ) )
+                                                     .map( TrackBuilder::track ) )
                                     ),
                                     div( new HtmlProps().className( "buttonContainer" ),
                                          fragment( _drumMachine.getEffects()
