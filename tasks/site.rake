@@ -34,24 +34,17 @@ desc 'Build the website'
 task 'site:deploy' => ['site:build'] do
   origin_url = 'https://github.com/react4j/react4j.github.io.git'
 
-  travis_build_number = ENV['TRAVIS_BUILD_NUMBER']
-  if travis_build_number
-    origin_url = origin_url.gsub('https://github.com/', 'git@github.com:')
-  end
-
   local_dir = "#{WORKSPACE_DIR}/target/remote_site"
   rm_rf local_dir
 
   sh "git clone -b master --depth 1 #{origin_url} #{local_dir}"
 
   in_dir(local_dir) do
-    message ="Update DrumLoop website#{travis_build_number.nil? ? '' : " - Travis build: #{travis_build_number}"}"
-
     rm_rf "#{local_dir}/drumloop"
     mkdir_p "#{local_dir}/drumloop"
     cp_r Dir["#{SITE_DIR}/drumloop"], local_dir
     sh 'git add . -f'
-    puts `git commit -m "#{message}"`
+    puts `git commit -m "Update DrumLoop website"`
     if 0 == $?.exitstatus
       sh 'git push -f origin master'
     end
