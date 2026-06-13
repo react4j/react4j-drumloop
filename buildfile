@@ -2,6 +2,17 @@ require 'buildr/git_auto_version'
 require 'buildr/top_level_generate_dir'
 require 'buildr/gwt'
 
+FORMATTER_JDK_EXPORTS =
+  %w(
+    --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED
+    --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED
+    --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED
+    --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED
+    --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED
+    --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED
+  )
+FORMATTER_JAVAC_OPTIONS = FORMATTER_JDK_EXPORTS.map { |arg| "-J#{arg}" }
+
 desc 'React4j Drum Machine experiment'
 define 'react4j-drumloop' do
   project.group = 'org.realityforge.react4j.drumloop'
@@ -30,6 +41,7 @@ define 'react4j-drumloop' do
                :gwt_user
 
   compile.options[:processor_path] << [:react4j_processor, :arez_processor, :sting_processor]
+  compile.options.other += FORMATTER_JAVAC_OPTIONS
 
   # Exclude the Dev module if EXCLUDE_GWT_DEV_MODULE is true
   GWT_MODULES = %w(react4j.drumloop.DrumLoopProd) + (ENV['EXCLUDE_GWT_DEV_MODULE'] == 'true' ? [] : %w(react4j.drumloop.DrumLoopDev))
