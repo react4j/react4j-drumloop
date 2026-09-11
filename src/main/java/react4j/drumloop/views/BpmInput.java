@@ -3,6 +3,7 @@ package react4j.drumloop.views;
 import akasha.HTMLInputElement;
 import java.util.Objects;
 import javax.annotation.Nonnull;
+import jsinterop.base.Js;
 import react4j.ReactNode;
 import react4j.annotations.Render;
 import react4j.annotations.View;
@@ -25,7 +26,7 @@ abstract class BpmInput
 
   private void onBpmChange( @Nonnull final FormEvent e )
   {
-    _drumMachine.setBpm( Integer.parseInt( ( (HTMLInputElement) e.getTarget() ).value ) );
+    _drumMachine.setBpm( Integer.parseInt( Js.<HTMLInputElement>uncheckedCast( e.getTarget() ).value ) );
   }
 
   @Render
