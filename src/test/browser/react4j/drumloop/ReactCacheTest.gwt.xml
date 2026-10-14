@@ -1,0 +1,12 @@
+<module rename-to='cache_test'>
+  <inherits name='com.google.gwt.core.Core'/>
+  <inherits name='com.google.gwt.dom.DOM'/>
+  <inherits name='jsinterop.base.Base'/>
+
+  <entry-point class='react4j.drumloop.ReactCacheTest'/>
+  <source path='' includes='ReactCache.java,ReactCacheTest.java'/>
+  <source path='browser/promise'/>
+  <public path='test_public'/>
+  <set-property name='user.agent' value='safari'/>
+  <add-linker name='sso'/>
+</module>

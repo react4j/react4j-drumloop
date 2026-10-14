@@ -34,7 +34,7 @@ public abstract class DrumMachine
   private final List<SoundEffect> _effects = new ArrayList<>();
   private int _bpm = INITIAL_BPM;
   @Nonnull
-  private final ReactCache.Resource<String, AudioBuffer> _audioCache;
+  private final ReactCache<String, AudioBuffer> _audioCache;
 
   DrumMachine()
   {
@@ -50,7 +50,15 @@ public abstract class DrumMachine
     _effects.add( new SoundEffect( this, "SQUAD (Am)", "sounds/loop130.wav" ) );
     _effects.add( new SoundEffect( this, "Hey", "sounds/hey.wav" ) );
     _effects.add( new SoundEffect( this, "Yeah", "sounds/yeah.wav" ) );
-    _audioCache = ReactCache.unstable_createResource( this::loadAudioData );
+    _audioCache = new ReactCache<>( this::loadAudioData );
+    for ( final Track track : _tracks )
+    {
+      _audioCache.preload( track.getSound() );
+    }
+    for ( final SoundEffect effect : _effects )
+    {
+      _audioCache.preload( effect.getSound() );
+    }
   }
 
   @Nonnull
@@ -76,7 +84,7 @@ public abstract class DrumMachine
   }
 
   @Nonnull
-  ReactCache.Resource<String, AudioBuffer> getAudioCache()
+  ReactCache<String, AudioBuffer> getAudioCache()
   {
     return _audioCache;
   }

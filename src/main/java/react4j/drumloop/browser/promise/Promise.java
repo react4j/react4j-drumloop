@@ -1,6 +1,7 @@
 package react4j.drumloop.browser.promise;
 
 import javax.annotation.Nonnull;
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
 
@@ -13,4 +14,9 @@ public final class Promise<T>
 
   @Nonnull
   public native <V> Promise<V> then( @Nonnull OnFulfilledCallback<? super T, ? extends V> onFulfilled );
+
+  @JsMethod( name = "then" )
+  @Nonnull
+  public native Promise<Void> thenAccept( @Nonnull AcceptCallback<? super T> onFulfilled,
+                                         @Nonnull AcceptCallback<Object> onRejected );
 }

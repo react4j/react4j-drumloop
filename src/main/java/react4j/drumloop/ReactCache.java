@@ -1,46 +1,93 @@
 package react4j.drumloop;
 
-import javaemul.internal.annotations.DoNotAutobox;
+import com.google.gwt.core.client.JavaScriptException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
 import javax.annotation.Nonnull;
-import jsinterop.annotations.JsFunction;
-import jsinterop.annotations.JsMethod;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsType;
+import javax.annotation.Nullable;
 import react4j.drumloop.browser.promise.Promise;
 
-@JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "ReactCache" )
-public final class ReactCache
+public final class ReactCache<InputType, OutputType>
 {
-  private ReactCache()
+  @Nonnull
+  private final Function<InputType, Promise<OutputType>> _loader;
+  @Nonnull
+  private final Map<InputType, Entry<OutputType>> _entries = new HashMap<>();
+
+  public ReactCache( @Nonnull final Function<InputType, Promise<OutputType>> loader )
   {
+    _loader = Objects.requireNonNull( loader );
   }
 
-  @JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "Object" )
-  public interface Resource<InputType, OutputType>
+  public void preload( @Nonnull final InputType input )
   {
-    void preload( @Nonnull InputType input );
-
-    OutputType read( @Nonnull InputType input );
+    getEntry( input );
   }
 
-  @FunctionalInterface
-  @JsFunction
-  public interface CreateResourceFn<InputType, OutputType>
+  public OutputType read( @Nonnull final InputType input )
   {
-    Promise<OutputType> createResource( @DoNotAutobox @Nonnull InputType input );
+    final Entry<OutputType> entry = getEntry( input );
+    if ( State.PENDING == entry._state )
+    {
+      // GWT unwraps this exception so React receives the original promise.
+      throw new JavaScriptException( entry._promise );
+    }
+    else if ( State.REJECTED == entry._state )
+    {
+      throw new JavaScriptException( entry._error );
+    }
+    else
+    {
+      return entry._value;
+    }
   }
 
-  @FunctionalInterface
-  @JsFunction
-  public interface InputToKeyFn<InputType>
+  @Nonnull
+  private Entry<OutputType> getEntry( @Nonnull final InputType input )
   {
-    Object deriveKey( @DoNotAutobox @Nonnull InputType input );
+    Entry<OutputType> entry = _entries.get( input );
+    if ( null == entry )
+    {
+      entry = new Entry<>( _loader.apply( input ) );
+      _entries.put( input, entry );
+    }
+    return entry;
   }
 
-  @JsMethod
-  public static native <InputType, OutputType> Resource<InputType, OutputType> unstable_createResource( @Nonnull CreateResourceFn<InputType, OutputType> createResourceFn,
-                                                                                                        @Nonnull InputToKeyFn<InputType> inputToKeyFn );
+  private enum State
+  {
+    PENDING, RESOLVED, REJECTED
+  }
 
-  @JsMethod
-  public static native <InputType, OutputType> Resource<InputType, OutputType> unstable_createResource( @Nonnull CreateResourceFn<InputType, OutputType> createResourceFn );
+  private static final class Entry<OutputType>
+  {
+    @Nonnull
+    private final Promise<OutputType> _promise;
+    @Nonnull
+    private State _state = State.PENDING;
+    @Nullable
+    private OutputType _value;
+    @Nullable
+    private Object _error;
+
+    private Entry( @Nonnull final Promise<OutputType> promise )
+    {
+      _promise = Objects.requireNonNull( promise );
+      _promise.thenAccept( value -> {
+        if ( State.PENDING == _state )
+        {
+          _value = value;
+          _state = State.RESOLVED;
+        }
+      }, error -> {
+        if ( State.PENDING == _state )
+        {
+          _error = error;
+          _state = State.REJECTED;
+        }
+      } );
+    }
+  }
 }
