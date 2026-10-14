@@ -1,12 +1,12 @@
 package react4j.drumloop;
 
-import akasha.promise.Promise;
 import javaemul.internal.annotations.DoNotAutobox;
 import javax.annotation.Nonnull;
 import jsinterop.annotations.JsFunction;
 import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsType;
+import react4j.drumloop.browser.promise.Promise;
 
 @JsType( isNative = true, namespace = JsPackage.GLOBAL, name = "ReactCache" )
 public final class ReactCache

@@ -1,12 +1,5 @@
 package react4j.drumloop.model;
 
-import akasha.Response;
-import akasha.WindowGlobal;
-import akasha.audio.AudioBuffer;
-import akasha.audio.AudioBufferSourceNode;
-import akasha.audio.AudioContext;
-import akasha.audio.GainNode;
-import akasha.promise.Promise;
 import arez.Arez;
 import arez.annotations.Action;
 import arez.annotations.ArezComponent;
@@ -17,6 +10,13 @@ import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
 import react4j.drumloop.ReactCache;
+import react4j.drumloop.browser.Response;
+import react4j.drumloop.browser.WindowGlobal;
+import react4j.drumloop.browser.audio.AudioBuffer;
+import react4j.drumloop.browser.audio.AudioBufferSourceNode;
+import react4j.drumloop.browser.audio.AudioContext;
+import react4j.drumloop.browser.audio.GainNode;
+import react4j.drumloop.browser.promise.Promise;
 import zemeckis.Zemeckis;
 
 @ArezComponent( service = Feature.ENABLE, requireId = Feature.DISABLE, disposeNotifier = Feature.DISABLE )

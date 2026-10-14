@@ -1,10 +1,10 @@
 package react4j.drumloop;
 
-import akasha.Element;
-import akasha.WindowGlobal;
 import com.google.gwt.core.client.EntryPoint;
 import react4j.ReactElement;
 import react4j.dom.ReactDOM;
+import react4j.drumloop.browser.Element;
+import react4j.drumloop.browser.WindowGlobal;
 import react4j.drumloop.ioc.DrumLoopInjector;
 import react4j.drumloop.views.DrumMachineBuilder;
 

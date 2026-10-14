@@ -1,10 +1,10 @@
 package react4j.drumloop.model;
 
-import akasha.audio.AudioBuffer;
 import java.util.Objects;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import react4j.Keyed;
+import react4j.drumloop.browser.audio.AudioBuffer;
 
 public abstract class AbstractSoundSample
   implements Keyed

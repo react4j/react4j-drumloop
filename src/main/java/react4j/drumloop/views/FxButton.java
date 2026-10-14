@@ -1,8 +1,5 @@
 package react4j.drumloop.views;
 
-import akasha.audio.AudioBufferSourceNode;
-import akasha.audio.AudioContext;
-import akasha.audio.GainNode;
 import arez.annotations.Action;
 import arez.annotations.Observable;
 import arez.annotations.PreDispose;
@@ -13,6 +10,9 @@ import react4j.annotations.Input;
 import react4j.annotations.Render;
 import react4j.annotations.View;
 import react4j.dom.proptypes.html.BtnProps;
+import react4j.drumloop.browser.audio.AudioBufferSourceNode;
+import react4j.drumloop.browser.audio.AudioContext;
+import react4j.drumloop.browser.audio.GainNode;
 import react4j.drumloop.model.SoundEffect;
 import static react4j.dom.DOM.*;
 
